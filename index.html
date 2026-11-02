@@ -8307,6 +8307,17 @@ FC180_POOLS.yuma.hislikes = ['好きなのはケーキと甘いものー', '趣�
 FC180_POOLS.renji.ashita = ['明日も会える？ ……楽しみにしてる', '明日の約束、忘れない。……僕も、楽しみ', '明日。……うん、指切りしたい気分'];
 FC180_POOLS.souta.ashita = ['明日も会える？ ……楽しみにしてる', '明日のこと、忘れないよ。……楽しみ', '明日。……君と会えるなら、頑張れる'];
 FC180_POOLS.yuma.ashita = ['明日も会えるー？ 楽しみにしてるー', '明日の約束、忘れないよー。楽しみー', '明日が待ち遠しいー'];
+
+FC180_POOLS.renji.hisashiburi = ['久しぶり。……少し、寂しかった', 'おかえり。待ってたよ'];
+FC180_POOLS.souta.hisashiburi = ['久しぶり。……少し、寂しかった', 'おかえり。……待ってた'];
+FC180_POOLS.yuma.hisashiburi = ['久しぶりー。少し寂しかったー', 'おかえりー。待ってたよー'];
+FC180_POOLS.renji.celebrate = ['すごい。……君のこと、誇らしい', 'よかった。……僕までうれしい', 'おめでとう。……今日は君の日だ'];
+FC180_POOLS.souta.celebrate = ['すごい。……君のこと、誇らしい', 'よかった。……僕までうれしい', 'おめでとう。……今日は君の日だね'];
+FC180_POOLS.yuma.celebrate = ['すごいー！ 君のこと誇らしいー', 'よかったー。俺までうれしいー', 'おめでとうー。今日は君の日だねー'];
+FC180_POOLS.renji.guchi = ['うん、聞くよ。……全部、聞く', '……そっか。無理しなくていい', '君の味方だよ。……いつでも'];
+FC180_POOLS.souta.guchi = ['うん、聞く。……全部、聞くよ', '……そっか。無理しなくていいよ', '君の味方だよ。……いつでも'];
+FC180_POOLS.yuma.guchi = ['うん、聞くよー。全部聞くー', 'そっかー。無理しないでねー', '君の味方だよー。いつでもねー'];
+var _fcLastTime180 = {};
 var FC180_RULES = [
   ['morning', /おはよ/], ['home', /ただいま/], ['night', /おやすみ/],
   ['bye', /バイバイ|またね|じゃあね|また明日/], ['greet', /こんにちは|こんばんは|ハロー/],
@@ -8329,6 +8340,8 @@ var FC180_RULES = [
   ['nokori', /(あと何日|残り何日|終わりまで)/],
   ['sendphoto', /(写真送って|写真見せて|写真みせて|写真ちょうだい)/],
   ['ashita', /(明日|今度)/],
+  ['celebrate', /(やった|できた|うまくいった|受かった|褒められた|おめでとう|合格)/],
+  ['guchi', /(愚痴|聞いてほしい|むかつく|イライラ|もやもや)/],
   ['tabeta', /食べた|ごはん|ご飯/], ['doko', /どこ/], ['hey', /^(ねえ|ねー|おい|ちょ|あの|もしもし)/]
 ];
 function fcReply180(k, text){
@@ -8400,6 +8413,8 @@ function fcArm180(){
     var ca = document.getElementById('choiceArea');
     if(!ca || ca.querySelector('.fcBar180')) return;
     ca.innerHTML = '<div class="fcChips180">' + fcChips180(k).map(function(c){ return '<button type="button" onclick="fcChip180(\'' + c + '\')">' + c + '</button>'; }).join('') + '</div><div class="fcBar180"><input id="fcInput180" type="text" maxlength="200" placeholder="メッセージを入力（フリートーク）" onkeydown="if(event.key===\'Enter\')fcSend180()"><button class="fcSend180" type="button" onclick="fcSend180()">送信</button></div>';
+    var inp180 = document.getElementById('fcInput180');
+    if(inp180) inp180.placeholder = CHARS[k].name + 'にメッセージ（フリートーク）';
     fcPoke180(k);
   } catch(e) {}
 }
@@ -8445,6 +8460,9 @@ function fcSend180(){
   var barr = (_fcBurst180[k] = (_fcBurst180[k] || []).filter(function(x){ return nowB - x < 25000; }));
   barr.push(nowB);
   if(barr.length >= 3 && Math.random() < 0.7){ res.msgs.unshift(fcPick180(k, 'burst', FC180_POOLS[k].burst)); barr.length = 0; }
+  var lastT = _fcLastTime180[k];
+  _fcLastTime180[k] = Date.now();
+  if(lastT && Date.now() - lastT > 30 * 60 * 1000 && Math.random() < 0.8) res.msgs.unshift(fcPick180(k, 'hisashiburi', FC180_POOLS[k].hisashiburi));
   if(res.msgs.some(function(mm){ return /？|聞かせて|どうだった|元気？|大丈夫？/.test(mm); })) _fcLast180['q:' + k] = 1;
   var mkey = 'mood:' + k + ':' + S.day;
   if(!_fcLast180[mkey]){ _fcLast180[mkey] = 1; var mood = FC180_MOODS[(S.day + k.length) % FC180_MOODS.length]; var mp = FC180_POOLS[k]['mood_' + mood]; if(mp && Math.random() < 0.65) res.msgs.unshift(fcPick180(k, 'mood_' + mood, mp)); }
