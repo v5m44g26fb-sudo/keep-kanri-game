@@ -8259,6 +8259,26 @@ FC180_POOLS.souta.emoji = ['……かわいい', '気持ち、伝わった'];
 FC180_POOLS.yuma.emoji = ['かわいいー', '気持ち伝わったよー'];
 var FC180_PHOTO = {renji: {coffee: 'sns_renji_latte.jpg'}, souta: {aquarium: 'ph_aquarium.jpg'}, yuma: {cake: 'ph_cake.jpg'}};
 var _fcBurst180 = {};
+
+FC180_POOLS.renji.morning_night = ['おはよ……って、もう夜だよ', '夜に、おはよう？ ……かわいい'];
+FC180_POOLS.souta.morning_night = ['おはよう……って、もう夜だよ', '夜の、おはよう？ ……ふふ'];
+FC180_POOLS.yuma.morning_night = ['おはよー……って、もう夜だよー', '夜におはよは、新しいー'];
+FC180_POOLS.renji.night_day = ['おやすみには、まだ早いよ', '昼から眠いの？ ……無理しないで'];
+FC180_POOLS.souta.night_day = ['おやすみには早いよ', '昼から眠い？ ……少し休んで'];
+FC180_POOLS.yuma.night_day = ['おやすみには早いよー', '昼から眠いのー？ 無理しないでー'];
+FC180_POOLS.renji.mood_genki = ['今日は、調子いい。……君とも話したい気分', '今日は元気。店でも褒められた'];
+FC180_POOLS.renji.mood_nemui = ['……ごめん、今日少し眠い。でも、君とは話したい', '今日は少し、眠い日。……声聞くと、少し覚める'];
+FC180_POOLS.renji.mood_amae = ['今日は、君に甘えたい気分。……だめ？', '……今日は近くにいたい'];
+FC180_POOLS.souta.mood_genki = ['今日は調子いい。……君とも話したい', '今日は、なんだか元気な日'];
+FC180_POOLS.souta.mood_nemui = ['……ごめん、今日は少し眠い。でも、君とは話したい', '今日は眠い日。……君の声で、少し目が覚める'];
+FC180_POOLS.souta.mood_amae = ['今日は……君に甘えたい気分', '……今日は、君のそばにいたい'];
+FC180_POOLS.yuma.mood_genki = ['今日は絶好調ー！ 君とも話したいー', '今日は元気いっぱいだよー'];
+FC180_POOLS.yuma.mood_nemui = ['ごめん、今日少し眠いー。でも君とは話したいー', '今日は眠い日ー。……君の声で覚めるけどー'];
+FC180_POOLS.yuma.mood_amae = ['今日は君に甘えたい気分ー。だめー？', '今日は近くにいたい気分なんだよねー'];
+FC180_POOLS.renji.callname = ['{N}。……呼んでみたかっただけ', '{N}って呼ぶと、安心する'];
+FC180_POOLS.souta.callname = ['{N}。……呼んでみたかっただけ', '{N}って、呼ぶの好きなんだ'];
+FC180_POOLS.yuma.callname = ['{N}。……呼んでみたかっただけー', '{N}って呼ぶと落ち着くー'];
+var FC180_MOODS = ['genki', 'nemui', 'amae', 'genki'];
 var FC180_RULES = [
   ['morning', /おはよ/], ['home', /ただいま/], ['night', /おやすみ/],
   ['bye', /バイバイ|またね|じゃあね|また明日/], ['greet', /こんにちは|こんばんは|ハロー/],
@@ -8296,6 +8316,9 @@ function fcReply180(k, text){
   if((intent === 'ack' || intent === 'question') && lastTopic && P[lastTopic] && Math.random() < 0.5) intent = lastTopic;
   if(intent && FC180_TOPICS.indexOf(intent) >= 0) _fcLast180['li:' + k] = intent;
   if(!intent && t.length <= 4) intent = 'ack';
+  var hr = new Date().getHours();
+  if(intent === 'morning' && (hr >= 21 || hr < 5) && P.morning_night) intent = 'morning_night';
+  if(intent === 'night' && hr >= 7 && hr < 17 && P.night_day) intent = 'night_day';
   var out = [];
   var susp = (S.suspicion && S.suspicion[k]) || 0;
   if(susp >= 50 && P.cold && (!intent || intent === 'question' || intent === 'hey' || intent === 'greet' || intent === 'ack') && Math.random() < 0.65){
@@ -8308,6 +8331,7 @@ function fcReply180(k, text){
     out.push(fcPick180(k, 'follow', P.follow));
   }
   if(out.length === 1 && Math.random() < 0.30 && susp < 50) out.push(fcPick180(k, 'follow', P.follow));
+  if(Math.random() < 0.16 && susp < 50 && P.callname) out.push(fcPick180(k, 'callname', P.callname));
   if(t.length >= 50 && P.longtext && Math.random() < 0.6) out.unshift(fcPick180(k, 'longtext', P.longtext));
   var photo = null;
   var pm = FC180_PHOTO[k];
@@ -8373,6 +8397,8 @@ function fcSend180(){
   var barr = (_fcBurst180[k] = (_fcBurst180[k] || []).filter(function(x){ return nowB - x < 25000; }));
   barr.push(nowB);
   if(barr.length >= 3 && Math.random() < 0.7){ res.msgs.unshift(fcPick180(k, 'burst', FC180_POOLS[k].burst)); barr.length = 0; }
+  var mkey = 'mood:' + k + ':' + S.day;
+  if(!_fcLast180[mkey]){ _fcLast180[mkey] = 1; var mood = FC180_MOODS[(S.day + k.length) % FC180_MOODS.length]; var mp = FC180_POOLS[k]['mood_' + mood]; if(mp && Math.random() < 0.65) res.msgs.unshift(fcPick180(k, 'mood_' + mood, mp)); }
   var queue = [];
   if(res.photo) queue.push({photo: res.photo});
   res.msgs.forEach(function(t2){ queue.push({text: t2}); });
