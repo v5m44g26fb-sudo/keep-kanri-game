@@ -4298,6 +4298,27 @@ body.fs-large .ft97Sec,body.fs-large .ft97LuckyTx{font-size:15.5px}
 /* lock screen quick buttons: slightly larger glyphs, closer to iOS */
 .lockBtn svg{width:27px;height:27px}
 </style>
+<style id="pass139">
+/* pass139: deep-screen fixes from full screenshot review.
+   Camera: fixed 694px stage overflowed the screen and pushed the shutter
+   off-screen; size it to the viewport so all controls fit one screen. */
+.cam74{height:calc(100dvh - 178px);min-height:470px}
+/* Compass: was a small floating card; make it a full-bleed black stage
+   like the sibling camera/calculator views, and keep the needle clear
+   of the N label. */
+.iosCompass{margin:-12px -14px 0;border-radius:0;min-height:calc(100dvh - 156px);padding-top:30px}
+#compNeedle{height:58px!important;margin:-58px 0 0 -2.5px!important}
+/* Safari start page: reading-list glasses icon gets a fixed box so it
+   cannot be squashed by the section-title flex row. */
+.sfWrap .sfSecT .sfGlasses{width:26px;height:26px;flex:none}
+.sfWrap .sfSecT .sfGlasses svg{width:26px;height:26px;display:block}
+/* Small screens (375x667 check): the clock stage was a fixed 672px and
+   pushed its tab bar off-screen; the camera viewfinder stage was a fixed
+   452px, so shrinking the camera shell squeezed its control rows into
+   each other. Both stages now flex with the viewport. */
+.clk77{height:calc(100dvh - 138px);min-height:420px}
+.cam74Stage{flex:1 1 auto;height:auto;min-height:170px}
+</style>
 </head>
 <body>
 <div class="layout">
@@ -6483,7 +6504,7 @@ tabs:'<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="curren
 plus:'<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
 x:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>',
 compass:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2.1 5-5 2.1 2.1-5z" fill="currentColor" stroke="none"/></svg>',
-glasses:'<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="7" cy="14.5" r="3.4"/><circle cx="17" cy="14.5" r="3.4"/><path d="M10.4 14.5h3.2M3.6 14L2.5 8.5M20.4 14l1.1-5.5"/></svg>'};
+glasses:'<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><circle cx="6.9" cy="13.5" r="4.1"/><circle cx="17.1" cy="13.5" r="4.1"/><path d="M11 13.5h2M2.8 12.5L1.8 7M21.2 12.5l1-5.5"/></svg>'};
 function sfCurTab(){ return _sfTabs[_sfCur]||{k:"start"}; }
 function sfStartIdx(){ for(var j=0;j<_sfTabs.length;j++) if(_sfTabs[j].k==="start") return j; return -1; }
 function sfHtml(){
