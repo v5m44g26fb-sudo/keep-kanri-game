@@ -6788,7 +6788,7 @@ function cmtTotal(p){ return p.comments.length + myCmts(p.id).length; }
 function igTabBar(){ return '<div class="igTabBar"><button onclick="showAppView(\'sns\')" aria-label="ホーム">'+IG_HOME82+'</button><button class="igTabOff82" onclick="igExplore144()" aria-label="検索">'+IG_SEARCH82+'</button><button class="igTabOff82" onclick="igCreate144()" aria-label="新規投稿">'+IG_NEW82+'</button><button class="igTabOff82" onclick="igReels144()" aria-label="リール">'+IG_REELS82+'</button><button onclick="openSnsProfile(\'me_soba\')" aria-label="プロフィール">'+personImg("あなた",27)+'</button></div>'; }
 function snsPostCard(p){ var liked=!!_likes[p.id];
 return '<div class="igPost"><div class="igPostHead"><button class="snsAvBtn" onclick="openSnsProfile(\''+p.id+'\')">'+snsAvatar(p)+'</button><button class="snsNameBtn" onclick="openSnsProfile(\''+p.id+'\')"><b>'+esc(dispName(p.user))+'</b></button>'+'<span class="igDots">•••</span></div>'+
-'<button class="snsImgBtn" onclick="openPost(\''+p.id+'\')"><img class="igImg" src="assets/'+p.img+'" alt=""></button>'+
+'<button class="snsImgBtn" onclick="openPost(\''+p.id+'\')"><img class="igImg" src="assets/'+p.img+'?v=148" alt=""></button>'+
 '<div class="igActs"><button onclick="toggleLike(\''+p.id+'\')" aria-label="いいね">'+IG_HEART.replace("FILL", liked? "#FF3040": "none")+'</button><button onclick="openPost(\''+p.id+'\')" aria-label="コメント">'+IG_CMT+'</button><button aria-label="リポスト">'+IG_REPOST82+'</button><button aria-label="共有">'+IG_PLANE+'</button><span class="igSave"><button aria-label="保存">'+IG_SAVE+'</button></span></div>'+
 '<div class="igLikes">いいね！'+(p.likes+(liked?1:0))+'件</div>'+
 '<div class="igCaption"><b>'+esc(dispName(p.user))+'</b>'+esc(p.text)+'</div>'+
@@ -6800,7 +6800,7 @@ function toggleLikeDetail(id){ _likes[id]=!_likes[id]; openPost(id);}
 function addComment(id){ var inp=document.getElementById("cmtIn"); if(!inp) return; var v=inp.value.trim(); if(!v) return; if(!S.myComments) S.myComments={}; (S.myComments[id]=S.myComments[id]||[]).push(v); saveGame(); openPost(id); }
 function openPost(id){ var p=null; allPosts144().forEach(function(x){ if(x.id===id) p=x;}); if(!p) return; var liked=!!_likes[p.id];
 var allCmts = p.comments.concat(myCmts(p.id).map(function(t){ return ["あなた",t]; }));
-setAppBody('<div class="igDetail82"><div class="igTopBar82"><button class="igBack82" onclick="showAppView(\'sns\')" aria-label="戻る">'+IG_CHEV82+'</button><b>投稿</b><span class="igTopActs82"><button aria-label="その他">•••</button></span></div><div class="igPost"><div class="igPostHead"><button class="snsAvBtn" onclick="openSnsProfile(\''+p.id+'\')">'+snsAvatar(p)+'</button><button class="snsNameBtn" onclick="openSnsProfile(\''+p.id+'\')"><b>'+esc(dispName(p.user))+'</b></button><span class="igDots">•••</span></div><img class="igImg" src="assets/'+p.img+'" alt=""><div class="igActs"><button onclick="toggleLikeDetail(\''+p.id+'\')" aria-label="いいね">'+IG_HEART.replace("FILL", liked? "#FF3040": "none")+'</button><button aria-label="コメント">'+IG_CMT+'</button><button aria-label="リポスト">'+IG_REPOST82+'</button><button aria-label="共有">'+IG_PLANE+'</button><span class="igSave"><button aria-label="保存">'+IG_SAVE+'</button></span></div><div class="igLikes">いいね！'+(p.likes+(liked?1:0))+'件</div><div class="igCaption"><b>'+esc(dispName(p.user))+'</b>'+esc(p.text)+'</div><div class="igDate">'+snsTimeLabel(p)+'</div>'+
+setAppBody('<div class="igDetail82"><div class="igTopBar82"><button class="igBack82" onclick="showAppView(\'sns\')" aria-label="戻る">'+IG_CHEV82+'</button><b>投稿</b><span class="igTopActs82"><button aria-label="その他">•••</button></span></div><div class="igPost"><div class="igPostHead"><button class="snsAvBtn" onclick="openSnsProfile(\''+p.id+'\')">'+snsAvatar(p)+'</button><button class="snsNameBtn" onclick="openSnsProfile(\''+p.id+'\')"><b>'+esc(dispName(p.user))+'</b></button><span class="igDots">•••</span></div><img class="igImg" src="assets/'+p.img+'?v=148" alt=""><div class="igActs"><button onclick="toggleLikeDetail(\''+p.id+'\')" aria-label="いいね">'+IG_HEART.replace("FILL", liked? "#FF3040": "none")+'</button><button aria-label="コメント">'+IG_CMT+'</button><button aria-label="リポスト">'+IG_REPOST82+'</button><button aria-label="共有">'+IG_PLANE+'</button><span class="igSave"><button aria-label="保存">'+IG_SAVE+'</button></span></div><div class="igLikes">いいね！'+(p.likes+(liked?1:0))+'件</div><div class="igCaption"><b>'+esc(dispName(p.user))+'</b>'+esc(p.text)+'</div><div class="igDate">'+snsTimeLabel(p)+'</div>'+
 '<div class="igCmtSect82">'+ allCmts.map(function(cm){ return '<div class="igCmtRow82">'+personImg(cm[0],32)+'<div class="igCmtMain82"><div class="igCmtTx82"><b>'+esc(dispName(cm[0]))+'</b>'+esc(cm[1])+'</div><div class="igCmtSub82"><span>返信する</span></div></div><button class="igCmtLike82" aria-label="コメントにいいね"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M12 20.7C6.4 17 3 13.6 3 9.9 3 7.2 5 5 7.7 5c1.7 0 3.3.9 4.3 2.4C13 5.9 14.6 5 16.3 5 19 5 21 7.2 21 9.9c0 3.7-3.4 7.1-9 10.8z"/></svg></button></div>';}).join("") +'</div>'+
 '<div class="igCmtInput82">'+personImg("あなた",36)+'<input id="cmtIn" type="text" maxlength="120" placeholder="コメントを追加…" onkeydown="if(event.key===\'Enter\')addComment(\''+p.id+'\')"><button onclick="addComment(\''+p.id+'\')">投稿する</button></div></div>'+igTabBar());}
 /* pass67: profile highlights — covers and labels derive only from the
@@ -6828,7 +6828,7 @@ document.getElementById("storyViewer").classList.add("open"); renderStory();
 }
 function openSnsProfile(id){ var p=null; allPosts144().forEach(function(x){ if(x.id===id) p=x;}); if(!p) return; var posts=allPosts144().filter(function(x){ return x.user===p.user && x.days[0]<=S.day;});
 var hls=userHighlights(p.user);
-var hlHtml = hls.length? '<div class="igHighlights">'+ hls.map(function(h){ return '<button class="igHlItem" onclick="openHighlight(\''+p.user+'\','+h.day+',\''+h.img+'\')"><span class="igHlRing"><img src="assets/'+h.img+'" alt=""></span><span class="igHlName">'+esc(h.label)+'</span></button>';}).join("") +'</div>': "";
+var hlHtml = hls.length? '<div class="igHighlights">'+ hls.map(function(h){ return '<button class="igHlItem" onclick="openHighlight(\''+p.user+'\','+h.day+',\''+h.img+'\')"><span class="igHlRing"><img src="assets/'+h.img+'?v=148" alt=""></span><span class="igHlName">'+esc(h.label)+'</span></button>';}).join("") +'</div>': "";
 /* pass82: follower / following are display values computed only from the
    already-visible SNS data (followers = total likes on the user's visible
    posts, following = distinct visible post owners the user has commented
@@ -6858,7 +6858,7 @@ document.getElementById("svUser").textContent=st.user; document.getElementById("
 var _svAv=document.getElementById("svAv"); _svAv.innerHTML=personImg(st.user,32); _svAv.style.background="none";
 var _svBg=document.getElementById("svBg"); if(_svBg) _svBg.style.backgroundImage="url(assets/"+st.img+")";
 var _svStamp=document.getElementById("svStamp"); if(_svStamp){ var _dl=(DAY_INFO[sday].label.match(/(\d+月\d+日)/)||["",""])[1]; _svStamp.innerHTML='<svg width="11" height="11" viewBox="0 0 24 24" fill="#262626" aria-hidden="true"><path d="M12 1.8A6.9 6.9 0 0 0 5.1 8.7c0 5.1 6.9 13.5 6.9 13.5s6.9-8.4 6.9-13.5A6.9 6.9 0 0 0 12 1.8zm0 9.4a2.6 2.6 0 1 1 0-5.2 2.6 2.6 0 0 1 0 5.2z"/></svg>'+esc(STORY_PLACE[st.img]||"駅前"); }
-var _svImgEl=document.getElementById("svImg"); _svImgEl.src="assets/"+st.img; _svImgEl.classList.remove("svIn"); void _svImgEl.offsetWidth; _svImgEl.classList.add("svIn");
+var _svImgEl=document.getElementById("svImg"); _svImgEl.src="assets/"+st.img+"?v=148"; _svImgEl.classList.remove("svIn"); void _svImgEl.offsetWidth; _svImgEl.classList.add("svIn");
 document.getElementById("svCaption").textContent=st.text;
 var _rb=document.getElementById("svReplyBox"); if(_rb){ _rb.value=""; _rb.placeholder=dispName(st.user)+"さんにメッセージを送信"; }
 storyLikeSync(); storyMenuClose(true);
@@ -6894,7 +6894,7 @@ function pvFavSync(){ var f=document.getElementById("pvFav"); if(f) f.innerHTML=
 function pvFavToggle(){ var k=pvCurFile(); if(!k) return; _favs[k]=!_favs[k]; pvFavSync();}
 /* pass114: filmstrip under the viewer image (thumbnails of the open
    list only; tapping one jumps through the existing openPhoto) */
-function pvStripSync(){ var s=document.getElementById("pvStrip"); if(!s) return; var L=window._PH||[]; s.innerHTML=L.map(function(p,i){ return '<button class="'+(i===(window._pvIdx||0)?"on":"")+'" onclick="openPhoto('+i+')" aria-label="写真'+(i+1)+'"><img src="assets/'+p.f+'" alt=""></button>'; }).join(""); var on=s.querySelector("button.on"); if(on) s.scrollLeft=Math.max(0, on.offsetLeft-(s.clientWidth/2)+22); }
+function pvStripSync(){ var s=document.getElementById("pvStrip"); if(!s) return; var L=window._PH||[]; s.innerHTML=L.map(function(p,i){ return '<button class="'+(i===(window._pvIdx||0)?"on":"")+'" onclick="openPhoto('+i+')" aria-label="写真'+(i+1)+'"><img src="assets/'+p.f+'?v=148" alt=""></button>'; }).join(""); var on=s.querySelector("button.on"); if(on) s.scrollLeft=Math.max(0, on.offsetLeft-(s.clientWidth/2)+22); }
 function pvDelete(){ var p=(window._PH||[])[window._pvIdx||0]; if(!p) return; _delPhotos[p.f]=1; closePhoto(); toast("写真を削除しました"); if(document.querySelector(".phWrap")) showAppView("photos"); }
 var _pvTX=0;
 function pvTouchStart(e){ _pvTX=e.changedTouches[0].clientX;}
@@ -6950,7 +6950,7 @@ function phTabsHtml(){ var cur=_ph.view==="album"? "albums": _ph.view; return '<
 function phWrapHtml(main){ return '<div class="phWrap"><div class="phMain">'+main+'</div>'+phTabsHtml()+'</div>'; }
 function phTab(v){ _ph.view=v; _ph.album=null; showAppView("photos"); }
 function phLibMode(m){ _ph.libMode=m; showAppView("photos"); }
-function phGridHtml(list, reg){ window._phLists=window._phLists||{}; window._phLists[reg]=list; if(!list.length) return ""; return '<div class="photoGrid">'+ list.map(function(p,i){ return '<button class="photoCell" onclick="phOpenList(\''+reg+'\','+i+')"><img src="assets/'+p.f+'" alt="'+esc(p.t)+'" loading="lazy">'+(_favs[p.f]? '<span class="phFavMark">❤</span>':"")+'</button>'; }).join("")+'</div>'; }
+function phGridHtml(list, reg){ window._phLists=window._phLists||{}; window._phLists[reg]=list; if(!list.length) return ""; return '<div class="photoGrid">'+ list.map(function(p,i){ return '<button class="photoCell" onclick="phOpenList(\''+reg+'\','+i+')"><img src="assets/'+p.f+'?v=148" alt="'+esc(p.t)+'" loading="lazy">'+(_favs[p.f]? '<span class="phFavMark">❤</span>':"")+'</button>'; }).join("")+'</div>'; }
 function phOpenList(reg,i){ window._PH=(window._phLists||{})[reg]||[]; openPhoto(i); }
 function phLibraryHtml(){ var lib=phLibList(); window._PH=lib;
 var top='<div class="muTopRow"><b>ライブラリ</b><img src="assets/av_me.jpg" alt=""></div>';
@@ -6959,7 +6959,7 @@ if(!lib.length) return top+seg+es98Html("photo","写真はまだありません"
 if(_ph.libMode==="all") return top+seg+phGridHtml(lib,"lib");
 var key=_ph.libMode==="month"? "_mo": "_dl";
 var html=top+seg, last="";
-lib.forEach(function(p,i){ if(p[key]!==last){ if(last) html+='</div>'; last=p[key]; var cnt=lib.filter(function(q){ return q[key]===last; }).length; html+='<div class="photoDateHead">'+last+'<span>'+cnt+'枚</span></div><div class="photoGrid">'; } html+='<button class="photoCell" onclick="phOpenList(\'lib\','+i+')"><img src="assets/'+p.f+'" alt="'+esc(p.t)+'" loading="lazy">'+(_favs[p.f]? '<span class="phFavMark">❤</span>':"")+'</button>'; });
+lib.forEach(function(p,i){ if(p[key]!==last){ if(last) html+='</div>'; last=p[key]; var cnt=lib.filter(function(q){ return q[key]===last; }).length; html+='<div class="photoDateHead">'+last+'<span>'+cnt+'枚</span></div><div class="photoGrid">'; } html+='<button class="photoCell" onclick="phOpenList(\'lib\','+i+')"><img src="assets/'+p.f+'?v=148" alt="'+esc(p.t)+'" loading="lazy">'+(_favs[p.f]? '<span class="phFavMark">❤</span>':"")+'</button>'; });
 if(last) html+='</div>';
 window._phLists=window._phLists||{}; window._phLists.lib=lib;
 return html; }
@@ -6980,7 +6980,7 @@ var items=phAlbumItems(id);
 var head='<div class="muBackRow"><button style="color:#0A84FF" onclick="phBackAlbums()">‹ アルバム</button></div><div class="phAlbumTitle">'+(names[id]||"アルバム")+'</div><div class="phAlbumSub">'+items.length+'枚</div>';
 if(id==="hidden") head+='<div class="phFaceNote">Face ID でロック解除済み。このアルバムの写真は、ライブラリと検索には表示されません。</div>';
 if(!items.length){ var e98= id==="fav"? es98Html("heart","まだお気に入りがありません","写真を開いて ♡ を押すと、ここに集まります。"): id==="deleted"? es98Html("trash","削除した写真はありません","削除した写真があると、ここに表示されます"): es98Html("photo","写真はまだありません","写真があると、ここに表示されます"); return head+e98; }
-if(id==="deleted"){ window._phLists=window._phLists||{}; window._phLists.deleted=items; return head+'<p class="small" style="padding:0 2px 8px">タップすると復元します。</p><div class="photoGrid">'+ items.map(function(p,i){ return '<button class="photoCell" onclick="phRestoreFile(\''+p.f+'\')"><img src="assets/'+p.f+'" alt="'+esc(p.t)+'" loading="lazy"></button>'; }).join("")+'</div>'; }
+if(id==="deleted"){ window._phLists=window._phLists||{}; window._phLists.deleted=items; return head+'<p class="small" style="padding:0 2px 8px">タップすると復元します。</p><div class="photoGrid">'+ items.map(function(p,i){ return '<button class="photoCell" onclick="phRestoreFile(\''+p.f+'\')"><img src="assets/'+p.f+'?v=148" alt="'+esc(p.t)+'" loading="lazy"></button>'; }).join("")+'</div>'; }
 return head+phGridHtml(items,"album"); }
 function phRestoreFile(f){ delete _delPhotos[f]; toast("写真を復元しました"); showAppView("photos"); }
 function phSearchHtml(){ var top='<div class="muTopRow"><b>検索</b><img src="assets/av_me.jpg" alt=""></div>';
@@ -7988,7 +7988,7 @@ function igExplore144(q){
   var list=users.filter(function(u){ return !q || dispName(u).indexOf(q)>=0 || u.indexOf(q)>=0; });
   var accts=list.map(function(u){ var pid=igUserPost144(u); return '<button class="igExAcct144" '+(pid? 'onclick="openSnsProfile(\''+pid+'\')"':"")+'><span class="igDmAv144">'+personImg(u,48)+'</span><span class="igExAcctTx144"><b>'+esc(dispName(u))+'</b><span>'+esc(u)+'</span></span></button>'; }).join("");
   var posts=allPosts144().filter(function(p){ return p.days[0]<=S.day; });
-  var grid=posts.map(function(p){ return '<button class="igExCell144" onclick="openPost(\''+p.id+'\')"><img src="assets/'+p.img+'" alt=""></button>'; }).join("");
+  var grid=posts.map(function(p){ return '<button class="igExCell144" onclick="openPost(\''+p.id+'\')"><img src="assets/'+p.img+'?v=148" alt=""></button>'; }).join("");
   setAppBody('<div class="igExWrap144">'+igTop144("検索","showAppView('sns')")
     +'<div class="igExSearch144"><input id="igExInput144" type="text" placeholder="検索" value="'+esc(q)+'" oninput="igExplore144(this.value)"></div>'
     +(q? '<div class="igExList144">'+(accts||'<div class="igDmEmpty144">見つかりませんでした</div>')+'</div>' : '<div class="igExGrid144">'+grid+'</div>')
@@ -8011,7 +8011,7 @@ function igReels144(){
   ov.innerHTML='<button class="igrClose144" onclick="igReelsClose144()" aria-label="閉じる"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg></button><div class="igrTitle144">リール</div><div class="igrScroll144">'
    + frames.map(function(f){
      var liked=!!_likes["reel_"+f.key];
-     return '<div class="igrFrame144"><img src="assets/'+f.img+'" alt=""><div class="igrShade144"></div>'
+     return '<div class="igrFrame144"><img src="assets/'+f.img+'?v=148" alt=""><div class="igrShade144"></div>'
       +'<div class="igrRail144"><button onclick="igReelLike144(this,\''+f.key+'\')" aria-label="いいね"><svg width="29" height="29" viewBox="0 0 24 24" fill="'+(liked?"#FF3040":"none")+'" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"><path d="M12 20.7C6.4 17 3 13.6 3 9.9 3 7.2 5 5 7.7 5c1.7 0 3.3.9 4.3 2.4C13 5.9 14.6 5 16.3 5 19 5 21 7.2 21 9.9c0 3.7-3.4 7.1-9 10.8z"/></svg><span>'+(f.base+(liked?1:0))+'</span></button>'
       +'<button '+(f.post? 'onclick="igReelsClose144();openPost(\''+f.post+'\')"':"")+' aria-label="コメント"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"><path d="M12 4c5 0 9 3.6 9 8s-4 8-9 8c-1.2 0-2.4-.2-3.4-.6L3 21l1.7-3.9C3.6 15.7 3 13.9 3 12c0-4.4 4-8 9-8z"/></svg><span>コメント</span></button>'
       +'<button onclick="toast(\'共有リンクをコピーしました\')" aria-label="共有"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"><path d="M21 3L10.5 13.5M21 3l-6.8 18-3.7-7.5L3 9.8 21 3z"/></svg><span>共有</span></button></div>'
