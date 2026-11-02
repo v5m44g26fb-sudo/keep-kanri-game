@@ -4324,6 +4324,23 @@ body.fs-large .ft97Sec,body.fs-large .ft97LuckyTx{font-size:15.5px}
    keeps the time/signal/battery visible over the call UI (white on dark). */
 .screen:has(.callOverlay.open) .statusbar{background:transparent;color:#fff;text-shadow:none;position:relative;z-index:97}
 </style>
+<style id="pass143">
+/* pass143: story viewer restyle, closer to real Instagram.
+   - no more gray circles behind the header buttons; plain glyphs + shadow
+   - caption: the full-width gradient slab becomes a compact bold text
+     block like typed story text, over a subtle bottom scrim
+   - location stamp: dark glass stamp becomes IG's white location sticker */
+.storyViewer::before{content:"";position:absolute;top:0;left:0;right:0;height:130px;background:linear-gradient(180deg,rgba(0,0,0,.30),rgba(0,0,0,0));z-index:2;pointer-events:none}
+.storyViewer::after{content:"";position:absolute;left:0;right:0;bottom:0;height:230px;background:linear-gradient(0deg,rgba(0,0,0,.36),rgba(0,0,0,0));z-index:1;pointer-events:none}
+.svBars{left:8px;right:8px;gap:4px;z-index:4}
+.svHead{z-index:4}
+.svHead button{background:none;width:34px;height:34px;filter:drop-shadow(0 1px 4px rgba(0,0,0,.45))}
+.svHead span{font-size:13.5px;color:rgba(255,255,255,.78)}
+.svCaption{left:14px;right:14px;bottom:78px;padding:0;background:none;font-size:16.5px;font-weight:600;line-height:1.45;letter-spacing:.01em;text-shadow:0 1px 10px rgba(0,0,0,.55),0 0 3px rgba(0,0,0,.45);z-index:3;max-width:88%}
+.svStamp{top:auto;right:auto;left:16px;bottom:34%;background:#fff;color:#262626;border:none;border-radius:8px;font-size:13px;font-weight:600;letter-spacing:0;padding:6px 9px;display:flex;align-items:center;gap:4px;transform:rotate(-2deg);box-shadow:0 2px 12px rgba(0,0,0,.28);text-shadow:none}
+.svReplyBox{border-width:1px;border-color:rgba(255,255,255,.8);font-size:14px}
+.igStories .storyName{font-size:12px;color:#262626}
+</style>
 </head>
 <body>
 <div class="layout">
@@ -4381,7 +4398,7 @@ body.fs-large .ft97Sec,body.fs-large .ft97LuckyTx{font-size:15.5px}
 <div class="storyViewer" id="storyViewer">
 <div class="svBg" id="svBg"></div>
 <div class="svBars" id="svBars"></div>
-<div class="svHead"><span class="svAv" id="svAv"><img class="pAv" src="assets/av_me.jpg" style="width:32px;height:32px" alt=""></span><b id="svUser"></b><span id="svTime"></span><button class="svMenuBtn" onclick="storyMenu()" aria-label="メニュー"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="19" cy="12" r="1.9"/></svg></button><button onclick="closeStory()" aria-label="閉じる">✕</button></div>
+<div class="svHead"><span class="svAv" id="svAv"><img class="pAv" src="assets/av_me.jpg" style="width:32px;height:32px" alt=""></span><b id="svUser"></b><span id="svTime"></span><button class="svMenuBtn" onclick="storyMenu()" aria-label="メニュー"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="19" cy="12" r="1.9"/></svg></button><button onclick="closeStory()" aria-label="閉じる"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg></button></div>
 <div class="svStamp" id="svStamp"></div>
 <img id="svImg" src="assets/ph_cafe.jpg" alt="">
 <div class="svCaption" id="svCaption"></div>
@@ -6700,7 +6717,7 @@ document.getElementById("svBars").innerHTML=_storyList.map(function(x,j){ return
 document.getElementById("svUser").textContent=st.user; document.getElementById("svTime").textContent=st.time;
 var _svAv=document.getElementById("svAv"); _svAv.innerHTML=personImg(st.user,32); _svAv.style.background="none";
 var _svBg=document.getElementById("svBg"); if(_svBg) _svBg.style.backgroundImage="url(assets/"+st.img+")";
-var _svStamp=document.getElementById("svStamp"); if(_svStamp){ var _dl=(DAY_INFO[sday].label.match(/(\d+月\d+日)/)||["",""])[1]; _svStamp.textContent="📍 "+(STORY_PLACE[st.img]||"駅前")+" ・ "+_dl; }
+var _svStamp=document.getElementById("svStamp"); if(_svStamp){ var _dl=(DAY_INFO[sday].label.match(/(\d+月\d+日)/)||["",""])[1]; _svStamp.innerHTML='<svg width="11" height="11" viewBox="0 0 24 24" fill="#262626" aria-hidden="true"><path d="M12 1.8A6.9 6.9 0 0 0 5.1 8.7c0 5.1 6.9 13.5 6.9 13.5s6.9-8.4 6.9-13.5A6.9 6.9 0 0 0 12 1.8zm0 9.4a2.6 2.6 0 1 1 0-5.2 2.6 2.6 0 0 1 0 5.2z"/></svg>'+esc(STORY_PLACE[st.img]||"駅前"); }
 var _svImgEl=document.getElementById("svImg"); _svImgEl.src="assets/"+st.img; _svImgEl.classList.remove("svIn"); void _svImgEl.offsetWidth; _svImgEl.classList.add("svIn");
 document.getElementById("svCaption").textContent=st.text;
 var _rb=document.getElementById("svReplyBox"); if(_rb){ _rb.value=""; _rb.placeholder=dispName(st.user)+"さんにメッセージを送信"; }
