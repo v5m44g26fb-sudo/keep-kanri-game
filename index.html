@@ -4252,9 +4252,30 @@ body.fs-large .ft97Sec,body.fs-large .ft97LuckyTx{font-size:15.5px}
 .titleLinks135{display:flex;justify-content:center;align-items:center;gap:9px;margin-top:17px}
 .titleLinks135 button{background:none;border:0;color:rgba(255,255,255,.88);font-size:13px;font-family:inherit;cursor:pointer;padding:2px 0}
 .titleLinks135 span{opacity:.35;font-size:11px}
+.screen:has(.title135) .statusbar{position:absolute;top:0;left:0;right:0;color:#fff;background:transparent;text-shadow:0 1px 7px rgba(0,0,0,.45);z-index:57}
 .lockCine135{cursor:pointer}
 .lockHint135{position:absolute;left:0;right:0;bottom:112px;display:flex;flex-direction:column;align-items:center;gap:0;color:rgba(255,255,255,.88);font-size:12px;letter-spacing:.06em;text-shadow:0 1px 8px rgba(0,0,0,.45);animation:hintBob135 2.2s ease-in-out infinite;pointer-events:none}
 @keyframes hintBob135{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+</style>
+<style id="pass136">
+/* ===== Realism pass (pass136, direct edit): kill the cream "skin" tint on app/chat
+   chrome so apps read as the real apps; photo extends under the status bar on Home;
+   suspicion row in chat becomes a slim quiet line; choices get neutral borders. */
+.screen:has(.home) .statusbar{position:absolute;top:0;left:0;right:0;z-index:57}
+.screen:has(.appView) .statusbar,.screen:has(.chatView) .statusbar{background:#fff;color:#111;text-shadow:none}
+.screen:has(.appView),.screen:has(.chatView){background:#fff}
+#screenBody:has(> .appView),#screenBody:has(> .chatView){background:#fff}
+.screen:has(.ft97Pre),.screen:has(.ft97Main){background:#26224E}
+#screenBody:has(> .appView:has(.ft97Pre)),#screenBody:has(> .appView:has(.ft97Main)){background:#26224E}
+.screen:has(.ft97Pre) .statusbar,.screen:has(.ft97Main) .statusbar{background:#26224E;color:#F3EDD8;text-shadow:none}
+.chatView .chatHead{background:#fff}
+.chatView .choiceArea{background:#fff;border-top:1px solid #E3E6EA}
+.chatHead .suspRow{margin-top:5px;font-size:10.5px;gap:6px}
+.chatHead .suspRow .meter{height:4px;border-radius:2px}
+.chatHead .suspRow .stage{font-size:10px;padding:1px 7px;border-radius:999px}
+.chatHead .suspRow .suspPct{font-size:10.5px}
+.choiceBtn{border:1.5px solid #DFE2DF;color:#1C1E1C;border-radius:16px;box-shadow:none}
+.choiceBtn:active{background:#06C755;color:#fff;border-color:#06C755}
 </style>
 </head>
 <body>
