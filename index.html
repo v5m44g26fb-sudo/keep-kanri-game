@@ -8293,6 +8293,13 @@ FC180_POOLS.renji.hisday = ['今日？ 店は忙しかった。でも、君の�
 FC180_POOLS.souta.hisday = ['今日？ 仕込みと接客。……君の分も、考えてた', '今日は新しいメニューの試作してた。……君に食べてほしいな', '今日は、ペンギンの動画見てた。……君にも見せたい'];
 FC180_POOLS.yuma.hisday = ['今日？ 仕込み手伝って、あとは君のこと考えてたー', '今日は常連さんに褒められたー。……君にも言いたくて', '今日は車で迎えに行けるか計算してたー。……半分、冗談ね'];
 var FC180_OTHER = {renji: ['勇志', '陸', 'りく'], souta: ['シオン', '陸', 'りく'], yuma: ['シオン', '勇志']};
+
+FC180_POOLS.renji.afterq = ['そっか。……聞けて、よかった', 'うん。君の話、もっと聞きたい', '……教えてくれてありがとう'];
+FC180_POOLS.souta.afterq = ['そっか。……聞けて、よかった', 'うん、君の話もっと聞かせて', '……教えてくれて、ありがとう'];
+FC180_POOLS.yuma.afterq = ['そっかー。聞けてよかったー', 'うん、君の話もっと聞かせてー', '教えてくれてありがとー'];
+FC180_POOLS.renji.sendphoto = ['……これでいい？ さっき撮った', 'うん。……君にだけ、ね'];
+FC180_POOLS.souta.sendphoto = ['いいよ。……これ、好きな一枚', 'うん。……君にだけ、ね'];
+FC180_POOLS.yuma.sendphoto = ['いいよー。これ好きな一枚ー', 'うん、君にだけねー'];
 var FC180_RULES = [
   ['morning', /おはよ/], ['home', /ただいま/], ['night', /おやすみ/],
   ['bye', /バイバイ|またね|じゃあね|また明日/], ['greet', /こんにちは|こんばんは|ハロー/],
@@ -8312,6 +8319,8 @@ var FC180_RULES = [
   ['praise', /(かっこいい|イケメン|素敵|すごい|さすが|優しい|やさしい|えらい)/],
   ['fortune', /(運勢|占い|おみくじ|ラッキー)/],
   ['hisday', /(何してた|どんな一日|今日はどうだった|一日どう)/],
+  ['nokori', /(あと何日|残り何日|終わりまで)/],
+  ['sendphoto', /(写真送って|写真見せて|写真みせて|写真ちょうだい)/],
   ['tabeta', /食べた|ごはん|ご飯/], ['doko', /どこ/], ['hey', /^(ねえ|ねー|おい|ちょ|あの|もしもし)/]
 ];
 function fcReply180(k, text){
@@ -8322,6 +8331,8 @@ function fcReply180(k, text){
   if(k === 'souta' && /(です|ます|でした|ません|ください|でしょうか)/.test(t)) intent = 'polite';
   if(!intent && ((k === 'renji' && t.indexOf('シオン') >= 0) || (k === 'souta' && t.indexOf('勇志') >= 0) || (k === 'yuma' && /(陸|りく)/.test(t)))) intent = 'name';
   if(!intent && FC180_OTHER[k] && FC180_OTHER[k].some(function(n){ return t.indexOf(n) >= 0; })) intent = 'jealous';
+  if(!intent && /(写真送って|写真見せて|写真みせて|写真ちょうだい)/.test(t)) intent = 'sendphoto';
+  if(!intent && /(あと何日|残り何日|終わりまで)/.test(t)) intent = 'nokori';
   if(!intent && /(なんで|どうして)/.test(t)) intent = 'why';
   if(!intent && !/[ぁ-んァ-ヶ一-龠a-zA-Z0-9]/.test(t)) intent = 'emoji';
   if(!intent){
@@ -8334,6 +8345,15 @@ function fcReply180(k, text){
   if((intent === 'ack' || intent === 'question') && lastTopic && P[lastTopic] && Math.random() < 0.5) intent = lastTopic;
   if(intent && FC180_TOPICS.indexOf(intent) >= 0) _fcLast180['li:' + k] = intent;
   if(!intent && t.length <= 4) intent = 'ack';
+  if(_fcLast180['q:' + k]){
+    delete _fcLast180['q:' + k];
+    if(['happy', 'fun', 'genki', 'tired', 'ack', 'hungry', 'sleepy', 'sad'].indexOf(intent) >= 0 && Math.random() < 0.6) intent = 'afterq';
+  }
+  if(intent === 'nokori'){
+    var left = 7 - S.day;
+    var nk = {renji: '終わりまで、あと' + left + '日。……一日ずつ、大事にする', souta: 'あと' + left + '日。……一日ずつ、大事にするよ', yuma: 'あと' + left + '日だよー。一日ずつ大事にしよー'}[k];
+    return {msgs: [nk], sticker: null, photo: null};
+  }
   var hr = new Date().getHours();
   if(intent === 'morning' && (hr >= 21 || hr < 5) && P.morning_night) intent = 'morning_night';
   if(intent === 'night' && hr >= 7 && hr < 17 && P.night_day) intent = 'night_day';
@@ -8353,6 +8373,7 @@ function fcReply180(k, text){
   if(t.length >= 50 && P.longtext && Math.random() < 0.6) out.unshift(fcPick180(k, 'longtext', P.longtext));
   var photo = null;
   var pm = FC180_PHOTO[k];
+  if(intent === 'sendphoto' && pm) photo = pm[Object.keys(pm)[0]];
   if(intent && pm && pm[intent] && _fcLast180['ph:' + k + ':' + S.day] !== intent && Math.random() < 0.5){ photo = pm[intent]; _fcLast180['ph:' + k + ':' + S.day] = intent; }
   if(!photo && intent === 'hallo' && S.completed && S.completed['d6_group'] && Math.random() < 0.4) photo = 'ph_halloween.jpg';
   var sticker = (intent && P.sticker && P.sticker[intent] && Math.random() < 0.4) ? P.sticker[intent] : null;
@@ -8415,6 +8436,7 @@ function fcSend180(){
   var barr = (_fcBurst180[k] = (_fcBurst180[k] || []).filter(function(x){ return nowB - x < 25000; }));
   barr.push(nowB);
   if(barr.length >= 3 && Math.random() < 0.7){ res.msgs.unshift(fcPick180(k, 'burst', FC180_POOLS[k].burst)); barr.length = 0; }
+  if(res.msgs.some(function(mm){ return /？|聞かせて|どうだった|元気？|大丈夫？/.test(mm); })) _fcLast180['q:' + k] = 1;
   var mkey = 'mood:' + k + ':' + S.day;
   if(!_fcLast180[mkey]){ _fcLast180[mkey] = 1; var mood = FC180_MOODS[(S.day + k.length) % FC180_MOODS.length]; var mp = FC180_POOLS[k]['mood_' + mood]; if(mp && Math.random() < 0.65) res.msgs.unshift(fcPick180(k, 'mood_' + mood, mp)); }
   var queue = [];
