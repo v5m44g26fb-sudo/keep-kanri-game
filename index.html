@@ -4585,7 +4585,7 @@ body.anim-off .fcTyping180 i{animation:none}
 <div id="setMainView">
 <div class="s73TopRow"><button class="s73Close" onclick="closeSettings()" aria-label="閉じる">✕</button></div>
 <div class="s73BigTitle">設定</div>
-<div id="verLine188" style="font-size:12px;color:#8E8E93;margin:-6px 0 10px 2px">キープ管理中！ ver.188</div>
+<div id="verLine188" style="font-size:12px;color:#8E8E93;margin:-6px 0 10px 2px">キープ管理中！ ver.189</div>
 <div class="s73Search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8E8E93" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5L16.7 16.7"/></svg><input id="setSearchInput" type="text" placeholder="検索" autocomplete="off" oninput="setSearch73(this.value)"><svg width="13" height="17" viewBox="0 0 12 18" fill="#8E8E93"><rect x="4" y="1" width="4" height="10" rx="2"/><path d="M1.5 8.5a4.5 4.5 0 0 0 9 0h-1.6a2.9 2.9 0 0 1-5.8 0H1.5zM5.2 13.4h1.6V16H5.2z"/></svg></div>
 <button class="s73Prof" onclick="setSub73('account')"><img src="assets/av_me.jpg" alt=""><span class="s73ProfTx"><b id="setProfName">あなた</b><span>Apple Account、iCloud、メディアと購入</span></span></button>
 <div class="s73Group">
@@ -6898,7 +6898,7 @@ function storyLikeKey(){ var st=_storyList[_storyIdx]; return st? st.user+":"+(_
 function storyLikeSync(){ var b=document.getElementById("svLikeBtn"); if(b) b.classList.toggle("liked", !!_storyLikes[storyLikeKey()]); }
 function storyLikeToggle(){ var k=storyLikeKey(); if(!k) return; _storyLikes[k]=!_storyLikes[k]; S.storyLikes=_storyLikes; S.storySeen=_storySeen; saveGame(); var b=document.getElementById("svLikeBtn"); if(b){ b.classList.toggle("liked", !!_storyLikes[k]); if(_storyLikes[k]){ b.classList.remove("liked"); void b.offsetWidth; b.classList.add("liked"); } } }
 function storyShare(){ storyPause(); toast("共有シート（この端末内のみ）"); setTimeout(function(){ if(document.getElementById("storyViewer").classList.contains("open")) storyPlay(); },900); }
-function storySend(){ var inp=document.getElementById("svReplyBox"); if(!inp) return; var v=inp.value.trim(); if(!v){ inp.blur(); return; } inp.value=""; inp.blur(); toast("メッセージを送信しました"); }
+function storySend(){ var inp=document.getElementById("svReplyBox"); if(!inp) return; var v=inp.value.trim(); if(!v){ inp.blur(); return; } inp.value=""; inp.blur(); var u=null; try { u=_storyList[_storyIdx].user; } catch(e) {} if(u){ if(!S.dmSent) S.dmSent={}; if(!S.dmSent[u]) S.dmSent[u]=[]; S.dmSent[u].push(v); saveGame(); if(typeof igDmAutoReply189 === 'function') igDmAutoReply189(u, v); toast("DMに送信しました"); } else { toast("メッセージを送信しました"); } }
 function storyMenu(){ storyPause(); document.getElementById("svMenu").classList.add("open"); }
 function storyMenuClose(silent){ document.getElementById("svMenu").classList.remove("open"); if(!silent && document.getElementById("storyViewer").classList.contains("open")) storyPlay(); }
 function storyMenuAct(kind){ storyMenuClose(true); toast(kind==="mute"? "ミュートしました（表示のみ）": "報告を受け付けました（表示のみ）"); storyPlay(); }
@@ -7900,7 +7900,44 @@ showLock();
    reels, and post creation replace the old display-only toasts.
    DM sends and created posts persist in the game save (S.dmSent / S.myPosts);
    nothing here touches suspicion, flags, or story data. */
-function allPosts144(){ return SNS_POSTS.filter(function(p){ return !p.after || (S.completed && S.completed[p.after]); }).concat(S.myPosts||[]); }
+function igMyCommentPool189(cap){
+  var pool = [];
+  if(/ケーキ/.test(cap)) pool.push(['陸', 'ケーキ！ 俺も食べたいー。一緒に作ろ？']);
+  if(/水族館|ペンギン/.test(cap)) pool.push(['勇志', 'ペンギン！ ……年パス、使ってくれた？']);
+  if(/コーヒー|ラテ|カフェ/.test(cap)) pool.push(['シオン', 'その店、僕も気になってた。……今度、一緒に']);
+  if(/海|空|夕/.test(cap)) pool.push(['陸', 'いい景色ー。……隣にいたかったなー']);
+  pool.push(['シオン', 'いい写真。……君の笑顔、僕が見たかったな']);
+  pool.push(['勇志', '素敵。……その笑顔、近くで見たかった']);
+  pool.push(['陸', 'かわいいー。……俺も一緒に写りたかったー']);
+  pool.push(['真央', 'いいなー！今度誘って？']);
+  pool.push(['あかり', '写真うますぎ！']);
+  return pool;
+}
+function igMyExtras189(p){
+  var h = 0; for(var i = 0; i < p.id.length; i++) h = (h * 31 + p.id.charCodeAt(i)) >>> 0;
+  var pool = igMyCommentPool189(p.text || '');
+  var topicN = igMyTopicCount189(p.text || '');
+  var comments = [];
+  var n = 2 + (h % 3);
+  for(var j = 0; j < topicN && j < n; j++) comments.push(pool[j]);
+  for(var j = 0; comments.length < n && j < pool.length - topicN; j++) comments.push(pool[topicN + (h + j) % (pool.length - topicN)]);
+  return {likes: 6 + (h % 18) + comments.length * 2, comments: comments};
+}
+function igMyTopicCount189(cap){
+  var n = 0;
+  if(/ケーキ/.test(cap)) n++;
+  if(/水族館|ペンギン/.test(cap)) n++;
+  if(/コーヒー|ラテ|カフェ/.test(cap)) n++;
+  if(/海|空|夕/.test(cap)) n++;
+  return n;
+}
+function allPosts144(){
+  var base = SNS_POSTS.filter(function(p){ return !p.after || (S.completed && S.completed[p.after]); });
+  var changed = false;
+  (S.myPosts || []).forEach(function(p){ if(!p.gen189){ p.gen189 = 1; var ex = igMyExtras189(p); p.likes = ex.likes; p.comments = ex.comments; changed = true; } });
+  if(changed) saveGame();
+  return base.concat(S.myPosts || []);
+}
 function igUserPost144(user){ var map={}; allPosts144().forEach(function(p){ if(!map[p.user]) map[p.user]=p.id; }); return map[user]||null; }
 function igTop144(title, backFn){
   return '<div class="igTopBar82"><button class="igBack82" onclick="'+backFn+'" aria-label="戻る">'+IG_CHEV82+'</button><b>'+title+'</b></div>';
@@ -7933,11 +7970,37 @@ var IG_DM_THREADS=[
    ["them","さすが。明日ねー"]]}
 ];
 var IG_DM_NOTES=[["真央","シフト代わってくれる人〜🥺"],["あかり","レポート終わらない…"],["勇志","水族館いきたい🐧"],["陸","新作うまくいった✌"]];
+var _igDmCur189 = null;
+var IG_DM_CHARKEY189 = {'シオン': 'renji', '勇志': 'souta', '陸': 'yuma'};
+var IG_DM_CANNED189 = {'真央': ['ほんとに！？ 詳しく聞きたい', 'いいじゃん〜！', '了解！ あとで話そ'], 'あかり': ['わかる〜', 'それな！', '今度一緒にいこ'], '店長': ['ありがとう', '了解しました', '助かります']};
+function igDmReplyText189(user, text){
+  var k = IG_DM_CHARKEY189[user];
+  if(k && typeof fcReply180 === 'function'){ var r = fcReply180(k, text || ''); return r.msgs.slice(0, 2); }
+  var pool = IG_DM_CANNED189[user] || ['ありがとう！', '了解！'];
+  return [pool[Math.floor(Math.random() * pool.length)]];
+}
+function igDmAutoReply189(user, text){
+  setTimeout(function(){
+    if(!S.dmReplies) S.dmReplies = {};
+    if(!S.dmReplies[user]) S.dmReplies[user] = [];
+    var idx = ((S.dmSent || {})[user] || []).length - 1;
+    if(idx < 0) return;
+    S.dmReplies[user][idx] = igDmReplyText189(user, text);
+    saveGame();
+    if(_igDmCur189 === user && document.getElementById('igDmMsgs144')) igDmThread144(user);
+  }, 1300);
+}
 function igDmThreadData144(user){
   var t=null; IG_DM_THREADS.forEach(function(x){ if(x.user===user) t=x; });
   if(!t) t={user:user, when:"", label:"", msgs:[]};
-  var sent=((S.dmSent||{})[user]||[]).map(function(x){ return ["me",x]; });
-  return {user:user, when:t.when, label:t.label, unread:!!t.unread, msgs:t.msgs.concat(sent)};
+  var sent = (S.dmSent || {})[user] || [];
+  var reps = (S.dmReplies || {})[user] || [];
+  var msgs = t.msgs.slice();
+  sent.forEach(function(s, i){
+    msgs.push(["me", s]);
+    if(reps[i]) reps[i].forEach(function(line){ msgs.push(["them", line]); });
+  });
+  return {user:user, when:t.when, label:t.label, unread:!!t.unread, msgs: msgs};
 }
 function igDmInbox144(){
   var notes='<div class="igNotes144"><div class="igNote144"><span class="igNoteAv144">'+personImg("あなた",56)+'<span class="igNoteBubble144 own">ノートを入力…</span></span><span class="igNoteName144">自分のノート</span></div>'
@@ -7954,6 +8017,7 @@ function igDmInbox144(){
     +'<div class="igDmSect144"><b>メッセージ</b><span>リクエスト</span></div>'+rows+'</div>'+igTabBar());
 }
 function igDmThread144(user){
+  _igDmCur189 = user;
   if(!S.dmRead) S.dmRead={};
   if(!S.dmRead[user]){ S.dmRead[user]=true; saveGame(); }
   var d=igDmThreadData144(user);
@@ -7990,6 +8054,7 @@ function igDmSend144(user){
   if(!S.dmSent[user]) S.dmSent[user]=[];
   S.dmSent[user].push(v); saveGame();
   igDmThread144(user);
+  igDmAutoReply189(user, v);
 }
 /* ---------------- notifications ---------------- */
 function igNotifs144(){
@@ -8000,6 +8065,17 @@ function igNotifs144(){
     mine.comments.forEach(function(cm,i){
       rows+='<div class="igNtRow144"><span class="igDmAv144">'+personImg(cm[0],44)+'</span><span class="igNtTx144"><b>'+esc(dispName(cm[0]))+'</b>さんがあなたの投稿にコメントしました：「'+esc(cm[1])+'」<span class="igNtTime144">'+(i+2)+'時間前</span></span><img class="igNtThumb144" src="assets/'+mine.img+'" alt=""></div>';
     });
+  }
+  var customs = (S.myPosts || []).slice();
+  if(customs.length){
+    var lp = null;
+    allPosts144().forEach(function(p){ if(p.id === customs[customs.length - 1].id) lp = p; });
+    if(lp && lp.comments && lp.comments.length){
+      rows += '<div class="igNtRow144"><span class="igDmAv144">' + personImg(lp.comments[0][0], 44) + '</span><span class="igNtTx144"><b>' + esc(dispName(lp.comments[0][0])) + '</b>さん、他' + Math.max(1, lp.likes - 1) + '人があなたの投稿に<b>いいね</b>しました。<span class="igNtTime144">最近</span></span><img class="igNtThumb144" src="assets/' + lp.img + '" alt=""></div>';
+      lp.comments.slice(0, 2).forEach(function(cm){
+        rows += '<div class="igNtRow144"><span class="igDmAv144">' + personImg(cm[0], 44) + '</span><span class="igNtTx144"><b>' + esc(dispName(cm[0])) + '</b>さんがあなたの投稿にコメントしました：「' + esc(cm[1]) + '」<span class="igNtTime144">最近</span></span><img class="igNtThumb144" src="assets/' + lp.img + '" alt=""></div>';
+      });
+    }
   }
   rows+='<div class="igNtRow144"><span class="igDmAv144">'+personImg("店長",44)+'</span><span class="igNtTx144"><b>店長</b>さんがあなたをフォローし始めました。<span class="igNtTime144">昨日</span></span><span class="igNtFollow144">フォロー中</span></div>';
   setAppBody('<div class="igNtWrap144">'+igTop144("お知らせ","showAppView('sns')")+'<div class="igNtSect144">今週</div>'+rows+'</div>'+igTabBar());
