@@ -6009,7 +6009,7 @@ var STORIES = {
 3:[["あかり","休みの日は水族館行きたい🐧","st_aquarium.jpg"],["真央","休憩中〜☕ 美術館の展示、今月までだって","sty_mao_break.jpg"],["店長","今日はお休み、ゆっくりしてね","sty_tencho_off.jpg"],["勇志","水族館きてる🐧 ペンギン元気ー","sty_souta.jpg"],["陸","ケーキの試作、もう少しで完成しそうー。最初の一口、食べさせてあげたい人がいるんだー","sty_yuma_cake3.jpg"]],
 4:[["真央","クローズまで長い夜になりそう🌙","sty_mao_night.jpg"],["あかり","グループチャット、なんか荒れてない？💦"],["真央","ハロウィンの飾り付け、ここまで進んだよ🎃","sty_mao_hallo2.jpg"],["陸","クローズ後の店。……君が残っててくれたら、帰すの遅くなっちゃうけどねー","sty_yuma_night.jpg"]],
 5:[["あかり","映画館の写真、また回ってきてる…","sty_akari_cinema3.jpg"],["真央","明日はハロウィン🎃 仮装の準備OK？","sty_mao_hallo.jpg"],["店長","明日の集合写真は閉店後です","sty_tencho_notice.jpg"],["シオン","金曜の夜。店は棚卸しで全員出勤","sty_renji_night.jpg"],["勇志","明日ハロウィン！準備たのしみ🎃","sty_souta_prep.jpg"]],
-6:[["真央","ハロウィン開幕🎃 まずは一杯どうぞ☕","sty_mao_hallo_latte.jpg"],["あかり","仮装の行列、映画館の前で見た📸","sty_akari_hallo.jpg"],["店長","集合写真、SNSに公開しました"],["勇志","ハロウィン🎃 仮装どう？","sty_souta_hallo2.jpg"],["陸","新作ケーキ、今日はハロウィン版を焼くよー。最初の一口は、決めてるけどねー","sty_yuma_cake2.jpg"]],
+6:[["真央","ハロウィン開幕🎃 まずは一杯どうぞ☕","sty_mao_hallo_latte.jpg"],["あかり","仮装の行列、映画館の前で見た📸","sty_akari_hallo.jpg"],["店長","集合写真は閉店後に撮ります。よろしくお願いします"],["勇志","ハロウィン🎃 仮装どう？","sty_souta_hallo2.jpg"],["陸","新作ケーキ、今日はハロウィン版を焼くよー。最初の一口は、決めてるけどねー","sty_yuma_cake2.jpg"]],
 7:[["真央","1週間おつかれさまー！","sty_mao_final.jpg"],["あかり","来週こそ普通の週にしよ…笑","sty_akari_cinema5.jpg"],["店長","来週もよろしくお願いします","sty_tencho_week.jpg"],["シオン","1週間おつかれさま。今日も店にいるよ"],["勇志","最終日！今日も隣にいてねー。離れたくないなー","sty_souta_final.jpg"],["陸","今日もいつも通りでいこうねー。……最終日も、君はかわいいねー"]]};
 function storyHtml(){
 var list = STORIES[S.day]||STORIES[1];
@@ -6746,7 +6746,7 @@ var LINE_ICOS='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" strok
 var LINE_INPUT='<div class="fakeInput"><span class="lineIco"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span><span class="lineIco"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg></span><span class="lineIco"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17.5l4.5-4.5 3.5 3.5 3-3 5 5"/></svg></span><span class="box">メッセージを入力</span><span class="lineIco"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5c1 1.2 2.2 1.8 3.5 1.8s2.5-.6 3.5-1.8"/><circle cx="9" cy="9.8" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="9.8" r="1" fill="currentColor" stroke="none"/></svg></span><span class="lineIco"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3"/></svg></span></div>';
 /* ---------- SNS ---------- */
 var SNS_POSTS=[
-{id:"cafe_hallo", user:"カフェ公式", av:"☕", col:"#8A5A3B", time:"21:15", days:[6,7], img:"ph_halloween.jpg", text:"本日の仮装イベント、大盛況でした！集合写真を公開中📸", likes:128, comments:[["店長","みんなおつかれさま！"],["真央","集合写真、誰か顔隠れてる笑"],["勇志","隣の人、誰だろーね😏"],["シオン","集合写真、いい笑顔だね。……来年、君の隣に写るのは僕がいいな。隣どころか、帰りも僕の助手席でね"],["陸","集合写真、誰の隣かって大事だよねー。……俺の隣にいたら、もっとかわいく写してあげたのになー"],["勇志","来年は俺が隣に写る！絶対！"]]},
+{id:"cafe_hallo", after:"d6_group", user:"カフェ公式", av:"☕", col:"#8A5A3B", time:"21:15", days:[6,7], img:"ph_halloween.jpg", text:"本日の仮装イベント、大盛況でした！集合写真を公開中📸", likes:128, comments:[["店長","みんなおつかれさま！"],["真央","集合写真、誰か顔隠れてる笑"],["勇志","隣の人、誰だろーね😏"],["シオン","集合写真、いい笑顔だね。……来年、君の隣に写るのは僕がいいな。隣どころか、帰りも僕の助手席でね"],["陸","集合写真、誰の隣かって大事だよねー。……俺の隣にいたら、もっとかわいく写してあげたのになー"],["勇志","来年は俺が隣に写る！絶対！"]]},
 {id:"akari_cinema", user:"あかり", av:"あ", col:"#7A6BA5", time:"金曜 21:40", days:[5,6,7], img:"post_akari_cinema.jpg", text:"駅前の映画館で、23日の夜に後ろ姿が似てる人がいた！時計と日付が写ってる写真つき。", likes:42, comments:[["あかり","写真、思ったより時計が大きく写っててびっくりした笑"],["真央","……気のせいだと思う"],["陸","似てる人、ねー。……本物は、俺の隣にいてほしいけどねー"]]},
 {id:"mao_latte", user:"真央", av:"真", col:"#B0627F", time:"15:20", days:[1,2,3,4,5,6,7], img:"ph_cafe.jpg", text:"今日のラテアート、過去イチかわいくできた気がする☕", likes:56, comments:[["店長","上手くなったね"],["あかり","飲むのもったいないやつ"]]},
 {id:"souta_aqua", user:"勇志", avImg:"souta", time:"15:30", days:[3,4,5,6,7], img:"ph_aquarium.jpg", text:"水族館のペンギン🐧 年パス買ってよかったー！", likes:73, comments:[["真央","ペンギンかわいすぎ"],["あかり","誰と行ったの？笑"],["シオン","……誰と行ったかは、聞かないでおくよ"]]},
@@ -7045,9 +7045,9 @@ var LUCKY = {
 1:"「おはようございます。ありがとうございます、でも自分で行きますね」――丁寧に、きっぱり断るのが今日の勝ち筋。",
 2:"「不安にさせてごめんね。隠し事はないから、信じてほしいな」――焦って言い訳するより、まず相手を安心させる一言が効く日。",
 3:"「ほんとだー。午後のいい思い出だね」――写真の時計は午後の時刻。日付と時刻の証拠は、否定せず味方につける日。",
-4:"「私は金曜は家でレポートしてましたよー（グループに宣言）」――グループで先に宣言した言葉は、明日の最強のアリバイになる。",
-5:"「私は端っこで、顔を隠して写りますー」――グループでの先回り宣言が、明日の写真の疑いを消す合言葉。",
-6:"「明日、最終日もいつも通り過ごそうね。約束」――今夜の約束の言葉が、明日の最終尋問をやわらげる。集合写真は「公式行事の集合写真」で全員一致させておくこと。",
+4:"「私は金曜は家でレポートしてましたよー（グループに宣言）」――今日、グループで先に宣言しておく言葉が、明日の最強のアリバイになる。",
+5:"「私は端っこで、顔を隠して写りますー」――今日グループで先回り宣言しておく言葉が、明日の写真の疑いを消す合言葉。",
+6:"「明日、最終日もいつも通り過ごそうね。約束」――今夜交わす約束の言葉が、明日の最終尋問をやわらげる。集合写真は「公式行事の集合写真」で全員一致させておくこと。",
 7:"「不安にさせてごめんね。これからはもっとちゃんと伝えるね」――最終日は、説明のあとに相手を安心させる一言で取り戻す日。"};
 return ft97Decorate(F[S.day]||F[1]) + '<div class="appCard ft97Lucky"><div class="ft97LuckyHead">🍀 <b>今日のラッキー返信フレーズ</b></div><p class="ft97LuckyTx">'+LUCKY[S.day]+'</p></div>';
 }
@@ -7878,7 +7878,7 @@ showLock();
    reels, and post creation replace the old display-only toasts.
    DM sends and created posts persist in the game save (S.dmSent / S.myPosts);
    nothing here touches suspicion, flags, or story data. */
-function allPosts144(){ return SNS_POSTS.concat(S.myPosts||[]); }
+function allPosts144(){ return SNS_POSTS.filter(function(p){ return !p.after || (S.completed && S.completed[p.after]); }).concat(S.myPosts||[]); }
 function igUserPost144(user){ var map={}; allPosts144().forEach(function(p){ if(!map[p.user]) map[p.user]=p.id; }); return map[user]||null; }
 function igTop144(title, backFn){
   return '<div class="igTopBar82"><button class="igBack82" onclick="'+backFn+'" aria-label="戻る">'+IG_CHEV82+'</button><b>'+title+'</b></div>';
