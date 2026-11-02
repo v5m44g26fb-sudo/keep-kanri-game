@@ -4319,6 +4319,11 @@ body.fs-large .ft97Sec,body.fs-large .ft97LuckyTx{font-size:15.5px}
 .clk77{height:calc(100dvh - 138px);min-height:420px}
 .cam74Stage{flex:1 1 auto;height:auto;min-height:170px}
 </style>
+<style id="pass140">
+/* pass140: the incoming-call overlay covered the status bar; a real iPhone
+   keeps the time/signal/battery visible over the call UI (white on dark). */
+.screen:has(.callOverlay.open) .statusbar{background:transparent;color:#fff;text-shadow:none;position:relative;z-index:97}
+</style>
 </head>
 <body>
 <div class="layout">
