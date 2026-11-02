@@ -4486,6 +4486,10 @@ body.fs-large .ft97Sec,body.fs-large .ft97LuckyTx{font-size:15.5px}
 .calNum175{position:absolute;left:0;right:0;top:26%;bottom:0;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:700;color:#1c1c1e;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;letter-spacing:-.5px;line-height:1}
 </style>
 <style>
+.fcChips180{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+.fcChips180 button{border:1px solid #d8ddd2;background:#fff;border-radius:999px;padding:6px 12px;font-size:12.5px;font-family:inherit;color:#333;cursor:pointer}
+.fcChips180 button:active{transform:scale(.95)}
+.fcSticker180{font-size:34px;line-height:1.15;padding:2px 2px}
 .fcBar180{display:flex;gap:8px;align-items:center}
 .fcBar180 input{flex:1;min-width:0;background:#F0EFE7;border:1px solid rgba(0,0,0,.05);border-radius:20px;padding:10px 14px;font-size:14px;font-family:inherit;outline:none;color:#222}
 .fcBar180 input:focus{border-color:#06C755}
@@ -7405,7 +7409,8 @@ function renderChat(){
 if(S.activeChar==="group"){ renderGroupChat(); return; }
 var k=S.activeChar, c=CHARS[k], v=S.suspicion[k], st=stageOf(v);
 var warn = v>=50? '<div class="warnBanner">⚠ 疑い度が50％を超えています。この相手はかなり疑っています。次の返信に注意してください。</div>': "";
-var lastMe=-1; S.history[k].forEach(function(m,i){ if(m.from==="me") lastMe=i; });
+var lastMe=-1; S.history[k].forEach(function(m,i){ if(m.type==="sticker"){ var contS = prevFrom==="them"; prevFrom="them"; return '<div class="msgRow'+(contS?" cont":"")+'">'+(contS?'<span class="msgSpacer"></span>':avTap94(avatarHTML(k,36),"openProfile('"+k+"')"))+'<div class="msgCol">'+(contS?"":'<span class="msgName">'+c.name+'</span>')+'<div class="msgLine"><div class="fcSticker180">'+esc(m.text)+'</div><span class="msgMeta">'+tt+'</span></div></div></div>'; }
+if(m.from==="me") lastMe=i; });
 var prevFrom=null;
 var msgs = '<div class="pastLink"><button onclick="openLog(\''+k+'\')">過去ログを見る</button></div>' + S.history[k].map(function(m,idx){
 if(m.type==="divider"){ prevFrom=null; return '<div class="dayDivider">'+esc(m.text.replace(/ の会話$/,""))+'</div>'; }
@@ -8225,6 +8230,18 @@ yuma: {
   day: {1:'1週間、始まるねー。俺は君の味方だよー', 2:'難しい話は置いといてー。今日は君の声、聞きたいー', 3:'休みの日ー。ゆっくりできたー？', 4:'クローズまで長い日ー。終わったら連絡してー', 5:'棚卸しの日ー。全員出勤、がんばろー', 6:'ハロウィンだねー。君の仮装、楽しみー', 7:'最終日ー。今日もいつも通りでいこー'}
 }
 };
+
+FC180_POOLS.renji.cold = ['……うん', 'そう。……ごめん、今は少し、考えたい', '君の言葉、信じたいけど。……まだ、整理できてない'];
+FC180_POOLS.souta.cold = ['……うん', 'そっか。……ごめん、今日は少し静かにしたい', '信じたいけど、まだ少しだけ、怖いんだ'];
+FC180_POOLS.yuma.cold = ['……うん', 'そっかー。……ごめん、今日は少し考えさせて', '信じたいけどさー。……まだ、引っかかってる'];
+FC180_POOLS.renji.poke = ['……ねえ、今大丈夫？ 少し、話したくて', '君の顔、浮かんだから。連絡、した', '今日の君、どうしてるかなって'];
+FC180_POOLS.souta.poke = ['……ねえ、今いい？ 声、聞きたくなって', '君のこと考えてたら、送ってた', '今日の君に、会いたいな'];
+FC180_POOLS.yuma.poke = ['ねえねえ、今大丈夫ー？ 声聞きたいー', '君のこと考えてたら、送っちゃったー', '今日の君、どうしてるかなーって'];
+FC180_POOLS.renji.sticker = {coffee:'\u2615', aquarium:'\uD83D\uDC20', movie:'\uD83C\uDFAC', night:'\uD83C\uDF19', hallo:'\uD83C\uDF83', love:'\uD83D\uDC99', sauna:'\u2668\uFE0F'};
+FC180_POOLS.souta.sticker = {aquarium:'\uD83D\uDC27', movie:'\uD83C\uDFAC', night:'\uD83C\uDF19', hallo:'\uD83C\uDF83', soba:'\uD83C\uDF5C', love:'\uD83D\uDC99', cake:'\uD83C\uDF70'};
+FC180_POOLS.yuma.sticker = {cake:'\uD83C\uDF70', coffee:'\u2615', night:'\uD83C\uDF19', hallo:'\uD83C\uDF83', car:'\uD83D\uDE97', love:'\uD83D\uDC99', aquarium:'\uD83D\uDC20'};
+var FC180_TOPICS = ['movie','aquarium','museum','cake','soba','coffee','shift','hallo','photo','car','friday','korea','sauna','weather'];
+var _fcPoke180 = {};
 var FC180_RULES = [
   ['morning', /おはよ/], ['home', /ただいま/], ['night', /おやすみ/],
   ['bye', /バイバイ|またね|じゃあね|また明日/], ['greet', /こんにちは|こんばんは|ハロー/],
@@ -8245,7 +8262,7 @@ var FC180_RULES = [
 ];
 function fcReply180(k, text){
   var P = FC180_POOLS[k];
-  if(!P) return ['うん'];
+  if(!P) return {msgs: ['うん'], sticker: null};
   var t = String(text || '');
   var intent = null;
   if(k === 'souta' && /(です|ます|でした|ません|ください|でしょうか)/.test(t)) intent = 'polite';
@@ -8256,18 +8273,25 @@ function fcReply180(k, text){
     }
   }
   if(!intent && /[？?]/.test(t)) intent = 'question';
+  var lastTopic = _fcLast180['li:' + k];
+  if((intent === 'ack' || intent === 'question') && lastTopic && P[lastTopic] && Math.random() < 0.5) intent = lastTopic;
+  if(intent && FC180_TOPICS.indexOf(intent) >= 0) _fcLast180['li:' + k] = intent;
   if(!intent && t.length <= 4) intent = 'ack';
   var out = [];
-  if(intent && P[intent]){
+  var susp = (S.suspicion && S.suspicion[k]) || 0;
+  if(susp >= 50 && P.cold && (!intent || intent === 'question' || intent === 'hey' || intent === 'greet' || intent === 'ack') && Math.random() < 0.65){
+    out.push(fcPick180(k, 'cold', P.cold));
+  } else if(intent && P[intent]){
     out.push(fcPick180(k, intent, P[intent]));
   } else if(Math.random() < 0.35 && P.day && P.day[S.day]){
     out.push(P.day[S.day]);
   } else {
     out.push(fcPick180(k, 'follow', P.follow));
   }
-  if(out.length === 1 && Math.random() < 0.30) out.push(fcPick180(k, 'follow', P.follow));
+  if(out.length === 1 && Math.random() < 0.30 && susp < 50) out.push(fcPick180(k, 'follow', P.follow));
+  var sticker = (intent && P.sticker && P.sticker[intent] && Math.random() < 0.4) ? P.sticker[intent] : null;
   var nm = S.name || '';
-  return out.map(function(s){ return nm ? s.split('{N}').join(nm) : s; });
+  return {msgs: out.map(function(s){ return nm ? s.split('{N}').join(nm) : s; }), sticker: sticker};
 }
 function fcArm180(){
   try {
@@ -8278,8 +8302,34 @@ function fcArm180(){
     if(pend.length) return;
     var ca = document.getElementById('choiceArea');
     if(!ca || ca.querySelector('.fcBar180')) return;
-    ca.innerHTML = '<div class="fcBar180"><input id="fcInput180" type="text" maxlength="200" placeholder="メッセージを入力（フリートーク）" onkeydown="if(event.key===\'Enter\')fcSend180()"><button class="fcSend180" type="button" onclick="fcSend180()">送信</button></div>';
+    ca.innerHTML = '<div class="fcChips180">' + fcChips180(k).map(function(c){ return '<button type="button" onclick="fcChip180(\'' + c + '\')">' + c + '</button>'; }).join('') + '</div><div class="fcBar180"><input id="fcInput180" type="text" maxlength="200" placeholder="メッセージを入力（フリートーク）" onkeydown="if(event.key===\'Enter\')fcSend180()"><button class="fcSend180" type="button" onclick="fcSend180()">送信</button></div>';
+    fcPoke180(k);
   } catch(e) {}
+}
+function fcChips180(k){
+  var dayChip = {1:'シフトがんばろ', 2:'ドライブ行きたい', 3:'水族館行きたい', 4:'裏口こわい', 5:'ケーキ楽しみ', 6:'仮装どうする？', 7:'最終日だね'}[S.day] || 'シフトがんばろ';
+  var feel = ['疲れた', '眠い', 'お腹すいた'][(S.day + k.length) % 3];
+  var aff = ['好き', '会いたい', 'ありがと'][(S.day + 1) % 3];
+  return [dayChip, feel, aff];
+}
+function fcChip180(t){
+  var inp = document.getElementById('fcInput180');
+  if(!inp) return;
+  inp.value = t;
+  fcSend180();
+}
+function fcPoke180(k){
+  var key = k + ':' + S.day;
+  if(_fcPoke180[key]) return;
+  _fcPoke180[key] = 1;
+  if(Math.random() >= 0.5) return;
+  setTimeout(function(){
+    if(S.activeChar !== k || S.activeEvent || S.busy || !inChat()) return;
+    var pend = EVENTS.filter(function(e){ return e.day === S.day && e.char === k && !isGroupEvent(e) && S.unlocked[e.id] && !S.completed[e.id]; });
+    if(pend.length) return;
+    pushMsg(k, {from: 'them', text: fcPick180(k, 'poke', FC180_POOLS[k].poke), fc: 1});
+    saveGame();
+  }, 1100);
 }
 function fcSend180(){
   var inp = document.getElementById('fcInput180');
@@ -8293,7 +8343,10 @@ function fcSend180(){
   saveGame();
   var ni = document.getElementById('fcInput180');
   if(ni) ni.focus();
-  var replies = fcReply180(k, text);
+  var res = fcReply180(k, text);
+  var queue = [];
+  if(res.sticker) queue.push({sticker: res.sticker});
+  res.msgs.forEach(function(t2){ queue.push({text: t2}); });
   var cm = document.getElementById('chatMsgs');
   var tp = document.createElement('div');
   tp.className = 'msgRow cont';
@@ -8304,11 +8357,13 @@ function fcSend180(){
     if(tp.parentNode) tp.parentNode.removeChild(tp);
     var i = 0;
     (function next(){
-      if(i >= replies.length){ saveGame(); return; }
-      if(S.activeChar === k && inChat()) pushMsg(k, {from: 'them', text: replies[i], fc: 1});
-      else S.history[k].push({from: 'them', text: replies[i], fc: 1});
+      if(i >= queue.length){ saveGame(); return; }
+      var item = queue[i];
+      var m = item.sticker ? {from: 'them', type: 'sticker', text: item.sticker, fc: 1} : {from: 'them', text: item.text, fc: 1};
+      if(S.activeChar === k && inChat()) pushMsg(k, m);
+      else S.history[k].push(m);
       i++;
-      if(i < replies.length) setTimeout(next, 700 + Math.random() * 500);
+      if(i < queue.length) setTimeout(next, 700 + Math.random() * 500);
       else saveGame();
     })();
   }, delay);
