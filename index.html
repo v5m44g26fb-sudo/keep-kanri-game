@@ -8355,6 +8355,7 @@ function fcReply180(k, text){
   if(!intent && /(写真送って|写真見せて|写真みせて|写真ちょうだい)/.test(t)) intent = 'sendphoto';
   if(!intent && /(あと何日|残り何日|終わりまで)/.test(t)) intent = 'nokori';
   if(!intent && /(好きな食べ物|好きなもの|趣味|好物|好きなタイプ)/.test(t)) intent = 'hislikes';
+  if(!intent && /(やった|できた|受かった|褒められた|おめでとう|合格|うまくいった)/.test(t)) intent = 'celebrate';
   if(!intent && /(なんで|どうして)/.test(t)) intent = 'why';
   if(!intent && !/[ぁ-んァ-ヶ一-龠a-zA-Z0-9]/.test(t)) intent = 'emoji';
   if(!intent){
