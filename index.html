@@ -4481,6 +4481,10 @@ body.fs-large .ft97Sec,body.fs-large .ft97LuckyTx{font-size:15.5px}
 .igCrCell144.sel{outline:3px solid #0095F6;outline-offset:-3px}
 
 </style>
+<style>
+.calIc175{position:relative}
+.calNum175{position:absolute;left:0;right:0;top:26%;bottom:0;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:700;color:#1c1c1e;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;letter-spacing:-.5px;line-height:1}
+</style>
 </head>
 <body>
 <div class="layout">
@@ -5942,7 +5946,7 @@ else if(talkN106>0) banner = '<div class="homeBanner">トークに <b>'+talkN106
 else if(gate && gate.gate.app) banner = '<div class="homeBanner">会話が止まっている…。<b>'+appName(gate.gate.app)+'</b> アプリを開いてみよう。</div>';
 else if(gate) banner = '<div class="homeBanner">新しい連絡が来るかもしれない。「トーク」を確認しよう。</div>';
 function appById134(id){ for(var i=0;i<APPS.length;i++) if(APPS[i].id===id) return APPS[i]; return null; }
-function appBtn134(a){ var badge = homeBadge86(a.id, talkN106); return '<button class="appItem" onpointerdown="qa86Down(\''+a.id+'\')" onpointerup="qa86Clear()" onpointerleave="qa86Clear()" onpointercancel="qa86Clear()" oncontextmenu="qa86Ctx(\''+a.id+'\',event)" onclick="qa86Tap(\''+a.id+'\')"><span class="appIcon"><img src="assets/ic_'+a.id+'.png" alt=""></span><small>'+a.name+'</small>'+badge+'</button>'; }
+function appBtn134(a){ var badge = homeBadge86(a.id, talkN106); var ico = a.id==="calendar"? '<span class="appIcon calIc175"><img src="assets/ic_calendar_blank.png" alt=""><span class="calNum175">'+((((DAY_INFO[S.day]||{}).label||"").match(/(\d+)日/)||[])[1]||"")+'</span></span>' : '<span class="appIcon"><img src="assets/ic_'+a.id+'.png" alt=""></span>'; return '<button class="appItem" onpointerdown="qa86Down(\''+a.id+'\')" onpointerup="qa86Clear()" onpointerleave="qa86Clear()" onpointercancel="qa86Clear()" oncontextmenu="qa86Ctx(\''+a.id+'\',event)" onclick="qa86Tap(\''+a.id+'\')">'+ico+'<small>'+a.name+'</small>'+badge+'</button>'; }
 var page1 = ["sns","photos","calendar","map","music","clock","fortune","memo"].map(function(id){return appBtn134(appById134(id));}).join("");
 var page2 = ["stay","folder"].map(function(id){return appBtn134(appById134(id));}).join("") + '<button class="appItem" onclick="openSettings()"><span class="appIcon"><img src="assets/ic_settings.png" alt=""></span><small>設定</small></button>';
 var dock = [["call","電話"],["browser","ブラウザ"],["sms","メッセージ"],["talk","トーク"]].map(function(d){return '<button class="appItem" onpointerdown="qa86Down(\''+d[0]+'\')" onpointerup="qa86Clear()" onpointerleave="qa86Clear()" onpointercancel="qa86Clear()" oncontextmenu="qa86Ctx(\''+d[0]+'\',event)" onclick="qa86Tap(\''+d[0]+'\')"><span class="appIcon"><img src="assets/ic_'+d[0]+'.png" alt="'+d[1]+'"></span>'+homeBadge86(d[0], talkN106)+'</button>';}).join("");
