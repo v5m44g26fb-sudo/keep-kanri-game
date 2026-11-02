@@ -4227,6 +4227,35 @@ body.fs-large .ft97Sec,body.fs-large .ft97LuckyTx{font-size:15.5px}
 .searchRow{display:flex;justify-content:center;margin:0 0 10px}
 .searchRow .searchPill{margin-left:0;padding:6px 20px;font-size:12.5px}
 </style>
+<style id="pass135">
+/* ===== Title screen (pass135, direct edit): start screen split from the lock screen,
+   following the reference flow: minimal title -> realistic lock -> Face ID -> home. */
+.title135{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;color:#fff;background:linear-gradient(180deg,rgba(5,8,16,.34),rgba(5,8,16,.06) 34%,rgba(5,8,16,.52) 66%,rgba(5,8,16,.80)),url(assets/wallpaper.webp) center/cover;padding:62px 26px 28px;animation:viewIn .38s cubic-bezier(.22,.9,.3,1) both}
+.titleTop135{font-size:11px;font-weight:600;letter-spacing:.34em;opacity:.85;text-align:center}
+.titleMain135{margin-top:auto}
+.titleLogo135{font-size:38px;font-weight:800;letter-spacing:.02em;margin:0;line-height:1.15;color:#fff;text-shadow:0 2px 22px rgba(0,0,0,.45)}
+.titleSub135{font-size:16.5px;font-weight:600;opacity:.94;margin-top:3px;color:#fff}
+.titleTag135{font-size:13.5px;line-height:1.75;opacity:.88;margin:13px 0 24px}
+.field135{margin:0 0 15px}
+.field135 label{display:block;font-size:11.5px;font-weight:700;letter-spacing:.14em;opacity:.88;margin-bottom:7px}
+.field135 input{width:100%;box-sizing:border-box;padding:14px 15px;border-radius:14px;border:1px solid rgba(255,255,255,.38);background:rgba(14,18,28,.44);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:#fff;font-size:16.5px;font-family:inherit;outline:none}
+.field135 input::placeholder{color:rgba(255,255,255,.45)}
+.fieldHint135{font-size:11.5px;opacity:.68;margin:6px 2px 0;line-height:1.55}
+.seg135{display:flex;width:100%;box-sizing:border-box}
+.seg135 button{flex:1;padding:9px 0;font-size:14px}
+.btn135{display:block;width:100%;box-sizing:border-box;padding:15px;border-radius:14px;border:0;font-family:inherit;font-size:16px;font-weight:700;cursor:pointer}
+.btn135.start{background:#fff;color:#14161c;margin-top:2px}
+.btn135.start:disabled{opacity:.35;cursor:not-allowed}
+.btn135.cont{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.35);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);margin-bottom:9px;font-size:14.5px;padding:13px}
+.link135{display:block;margin:0 auto 2px;background:none;border:0;color:rgba(255,255,255,.78);font-size:12.5px;font-family:inherit;text-decoration:underline;cursor:pointer}
+.saveNote135{text-align:center;font-size:11px;opacity:.62;margin:3px 0 15px}
+.titleLinks135{display:flex;justify-content:center;align-items:center;gap:9px;margin-top:17px}
+.titleLinks135 button{background:none;border:0;color:rgba(255,255,255,.88);font-size:13px;font-family:inherit;cursor:pointer;padding:2px 0}
+.titleLinks135 span{opacity:.35;font-size:11px}
+.lockCine135{cursor:pointer}
+.lockHint135{position:absolute;left:0;right:0;bottom:112px;display:flex;flex-direction:column;align-items:center;gap:0;color:rgba(255,255,255,.88);font-size:12px;letter-spacing:.06em;text-shadow:0 1px 8px rgba(0,0,0,.45);animation:hintBob135 2.2s ease-in-out infinite;pointer-events:none}
+@keyframes hintBob135{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+</style>
 </head>
 <body>
 <div class="layout">
@@ -5567,22 +5596,37 @@ function lockCamSnap123(){ var o=document.getElementById("lockCamOverlay"); if(!
 function lockCamFlip123(){ var o=document.getElementById("lockCamOverlay"); if(o) o.classList.toggle("flip"); }
 function showLock(){
 var saved = loadSave();
-var contHtml = saved? '<button class="btn btn-white" onclick="continueGame()">▶ 続きから再開（'+esc(saved.name)+'・'+saved.day+'日目・'+(saved.diff==="hard"?"ハード":"ふつう")+')</button><button class="btn btn-outline" onclick="clearSave();showLock()">セーブを消して最初から</button><p class="saveNote">進行は自動でこの端末に保存されます。</p>': "";
-var lockDate = "10月26日 月曜日"; if(saved && DAY_INFO[saved.day]){ var _lm = DAY_INFO[saved.day].label.match(/^(.+)（(.)）$/); if(_lm) lockDate = _lm[1]+" "+_lm[2]+"曜日"; }
+var contHtml = saved? '<button class="btn135 cont" onclick="continueGame()">▶ 続きから再開（'+esc(saved.name)+'・'+saved.day+'日目・'+(saved.diff==="hard"?"ハード":"ふつう")+')</button><button class="link135" onclick="clearSave();showLock()">セーブを消して最初から</button><p class="saveNote135">進行は自動でこの端末に保存されます</p>': "";
 body.innerHTML =
-'<div class="lock"><div class="lockGlyph84"><svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M12 2.5a4.6 4.6 0 0 1 4.6 4.6v2.2h1a2 2 0 0 1 2 2V20a2 2 0 0 1-2 2H6.4a2 2 0 0 1-2-2v-8.7a2 2 0 0 1 2-2h1V7.1A4.6 4.6 0 0 1 12 2.5zm-2.7 6.8h5.4V7.1a2.7 2.7 0 1 0-5.4 0v2.2z"/></svg></div><div class="date">'+lockDate+'</div><div class="clock">9:41</div>'+
-'<div class="lockNotif"><div class="lnTop"><span class="lnApp"><img class="lnIco" src="assets/ic_talk.png" alt="">トーク</span><span class="lnTime">今</span></div><b>3件の新着メッセージ</b><p>ジフン・颯太・悠真からメッセージが届いています。……全員、恋人です。</p></div>'+
-'<div class="lockCard"><b>誰のiPhoneですか？</b><p>Face IDでは認識できませんでした。<br>このスマホの持ち主の名前を入力すると、ロックが解除されます。</p>'+
-'<input id="nameInput" type="text" maxlength="8" placeholder="名前（例：みお）" autocomplete="off"></div>'+
-'<div class="lockCard diffCard"><b style="display:block">難易度</b><div class="segBtns" style="margin-top:18px"><button id="diffNormal" class="on" onclick="setPendingDiff(\'normal\')">ふつう</button><button id="diffHard" onclick="setPendingDiff(\'hard\')">ハード</button></div><p id="diffDesc">いつものバランス。まずはここから。</p></div>'+
-'<button class="btn btn-green" id="unlockBtn" disabled>ロック解除 → ゲーム開始</button>'+ contHtml +
-'<div class="lockSubBtns"><button class="btn btn-outline" onclick="showRecords()">エンディング図鑑・実績</button>'+
-'<button class="btn btn-outline" onclick="openSettings()">設定</button></div>'+
-'<div class="lockBtns"><button type="button" class="lockBtn" id="lockFlashBtn" aria-label="フラッシュライト" onclick="lockFlash76()"><svg viewBox="0 0 24 24" fill="#fff" width="23" height="23"><path d="M9.4 2.1h5.2l.9 5.6H8.5l.9-5.6z"/><path d="M8.5 9.2h7l-.6 10.6a2.1 2.1 0 0 1-2.1 2h-1.6a2.1 2.1 0 0 1-2.1-2L8.5 9.2z"/></svg></button><button type="button" class="lockBtn" id="lockCamBtn" aria-label="カメラ" onclick="lockCam76()"><svg viewBox="0 0 24 24" width="25" height="25"><path fill="#fff" d="M21 6.4h-3.1L16 3.6a1.4 1.4 0 0 0-1.2-.6H9.2A1.4 1.4 0 0 0 8 3.6L6.1 6.4H3A1.6 1.6 0 0 0 1.4 8v11A1.6 1.6 0 0 0 3 20.6h18a1.6 1.6 0 0 0 1.6-1.6V8A1.6 1.6 0 0 0 21 6.4zM12 17.4a4.4 4.4 0 1 1 0-8.8 4.4 4.4 0 0 1 0 8.8z"/><circle cx="12" cy="13" r="3.1" fill="rgba(18,19,24,.88)"/><circle cx="12" cy="13" r="1.7" fill="rgba(255,255,255,.28)"/></svg></button></div></div>';
+'<div class="title135">'+
+'<div class="titleTop135">スマホ恋愛シミュレーション</div>'+
+'<div class="titleMain135">'+
+'<h1 class="titleLogo135">キープ管理中！</h1>'+
+'<div class="titleSub135">〜バレたら終わり〜</div>'+
+'<p class="titleTag135">3人の恋人、1台のスマホ。<br>バレたら、終わり。</p>'+
+contHtml +
+'<div class="field135"><label for="nameInput">主人公の名前</label><input id="nameInput" type="text" maxlength="8" placeholder="名前（例：みお）" autocomplete="off"><p class="fieldHint135">このスマホの持ち主の名前。ゲーム中の表示に使われます。</p></div>'+
+'<div class="field135"><label>難易度</label><div class="segBtns light seg135"><button id="diffNormal" class="on" onclick="setPendingDiff(\'normal\')">ふつう</button><button id="diffHard" onclick="setPendingDiff(\'hard\')">ハード</button></div><p class="fieldHint135" id="diffDesc">いつものバランス。まずはここから。</p></div>'+
+'<button class="btn135 start" id="unlockBtn" disabled>ゲームをはじめる</button>'+
+'<div class="titleLinks135"><button onclick="showRecords()">エンディング図鑑・実績</button><span>・</span><button onclick="openSettings()">設定</button></div>'+
+'</div></div>';
 var inp=document.getElementById("nameInput"), btn=document.getElementById("unlockBtn");
 inp.addEventListener("input",function(){ btn.disabled = inp.value.trim().length===0;});
-btn.addEventListener("click",function(){ S.name = inp.value.trim(); S.diff = pendingDiff; saveGame(); var fo=document.getElementById("faceOverlay"); fo.classList.add("open"); setTimeout(function(){ fo.classList.remove("open"); showHome(); toast(S.name+"としてゲーム開始（"+(S.diff==="hard"?"ハード":"ふつう")+"）。まずは「トーク」を開こう");}, SETTINGS.anim? 950: 60);});
+btn.addEventListener("click",function(){ S.name = inp.value.trim(); S.diff = pendingDiff; saveGame(); showLockCine(); });
 inp.focus();
+}
+var _lockY135=null;
+function lockTouchStart135(ev){ _lockY135 = ev.changedTouches[0].clientY; }
+function lockTouchEnd135(ev){ if(_lockY135===null) return; var dy = _lockY135 - ev.changedTouches[0].clientY; _lockY135=null; if(dy>40 && !ev.target.closest("button")) unlockFromLock135(); }
+function unlockFromLock135(){ var fo=document.getElementById("faceOverlay"); fo.classList.add("open"); setTimeout(function(){ fo.classList.remove("open"); showHome(); toast(S.name+"としてゲーム開始（"+(S.diff==="hard"?"ハード":"ふつう")+"）。まずは「トーク」を開こう");}, SETTINGS.anim? 950: 60); }
+function showLockCine(){
+var saved = loadSave();
+var lockDate = "10月26日 月曜日"; if(saved && DAY_INFO[saved.day]){ var _lm = DAY_INFO[saved.day].label.match(/^(.+)（(.)）$/); if(_lm) lockDate = _lm[1]+" "+_lm[2]+"曜日"; }
+body.innerHTML =
+'<div class="lock lockCine135" onclick="if(!event.target.closest(\'button\'))unlockFromLock135()" ontouchstart="lockTouchStart135(event)" ontouchend="lockTouchEnd135(event)"><div class="lockGlyph84"><svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M12 2.5a4.6 4.6 0 0 1 4.6 4.6v2.2h1a2 2 0 0 1 2 2V20a2 2 0 0 1-2 2H6.4a2 2 0 0 1-2-2v-8.7a2 2 0 0 1 2-2h1V7.1A4.6 4.6 0 0 1 12 2.5zm-2.7 6.8h5.4V7.1a2.7 2.7 0 1 0-5.4 0v2.2z"/></svg></div><div class="date">'+lockDate+'</div><div class="clock">9:41</div>'+
+'<div class="lockNotif"><div class="lnTop"><span class="lnApp"><img class="lnIco" src="assets/ic_talk.png" alt="">トーク</span><span class="lnTime">今</span></div><b>3件の新着メッセージ</b><p>ジフン・颯太・悠真からメッセージが届いています。……全員、恋人です。</p></div>'+
+'<div class="lockHint135"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 14l7-7 7 7"/></svg><span>上にスワイプして開く</span></div>'+
+'<div class="lockBtns"><button type="button" class="lockBtn" id="lockFlashBtn" aria-label="フラッシュライト" onclick="lockFlash76();event.stopPropagation()"><svg viewBox="0 0 24 24" fill="#fff" width="23" height="23"><path d="M9.4 2.1h5.2l.9 5.6H8.5l.9-5.6z"/><path d="M8.5 9.2h7l-.6 10.6a2.1 2.1 0 0 1-2.1 2h-1.6a2.1 2.1 0 0 1-2.1-2L8.5 9.2z"/></svg></button><button type="button" class="lockBtn" id="lockCamBtn" aria-label="カメラ" onclick="lockCam76();event.stopPropagation()"><svg viewBox="0 0 24 24" width="25" height="25"><path fill="#fff" d="M21 6.4h-3.1L16 3.6a1.4 1.4 0 0 0-1.2-.6H9.2A1.4 1.4 0 0 0 8 3.6L6.1 6.4H3A1.6 1.6 0 0 0 1.4 8v11A1.6 1.6 0 0 0 3 20.6h18a1.6 1.6 0 0 0 1.6-1.6V8A1.6 1.6 0 0 0 21 6.4zM12 17.4a4.4 4.4 0 1 1 0-8.8 4.4 4.4 0 0 1 0 8.8z"/><circle cx="12" cy="13" r="3.1" fill="rgba(18,19,24,.88)"/><circle cx="12" cy="13" r="1.7" fill="rgba(255,255,255,.28)"/></svg></button></div></div>';
 }
 var pendingDiff = "normal";
 function setPendingDiff(d){ pendingDiff=d;
