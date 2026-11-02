@@ -5026,21 +5026,6 @@ var EVENTS = [
 ]}
 ]},
 /* ---------- DAY 4 (10/29 close) ---------- */
-{id:"d4_r_group",day:4,char:"renji",preview:"スタッフのグループチャット、見た？",blocks:[
-{msgs:["スタッフのグループチャット、見た？","先週金曜、夜の話出てたんだけど。……君の名前も、出てた"]},
-{choice:[
-{t:"見たよ。金曜は家でレポートしてた。前にも言ったよね",d:5,note:"少し怪しまれた（尋問はリスク）",reply:["……そうだね。前も、聞いた","グループで話題なると、改めて気になってしまう"]},
-{t:"勇志と映画に行った日のことです",d:18,note:"矛盾＋名前出し",reply:["やっぱり、勇志と……？","家いたって話と、全然違うじゃない"]},
-{t:"グループチャットは見ておりません。",d:20,note:"口調が違う…",reply:["その言い方…","普段と違うと、余計、気になるよ"]}
-]}
-]},
-{id:"d4_s_group",day:4,char:"souta",preview:"グループチャットの金曜の話…",blocks:[
-{msgs:["ねえ、グループで金曜の夜の話、出てたけど","俺と映画行ったこと、言ってないよね……？"]},
-{choice:[
-{t:"言ってないよー。ふたりだけの話だよ",d:0,reply:["……よかった。ありがと","ふたりだけの秘密、か。……守るから、安心して","帰り、いつもの道で帰ろ？ 先輩の歩幅、俺、合わせられるから"]},
-{t:"シオンには全部話したよ",d:15,note:"他の人の名前を出した",reply:["シオンさんに全部…！？","なんで…俺とのこと、話したの…？"]}
-]}
-]},
 {id:"d4_y_shift",day:4,char:"yuma",preview:"明日の夜、電話の約束だよねー？",blocks:[
 {msgs:["明日の夜、電話の約束だよねー？","金曜は休みって言ってたもんねー"]},
 {choice:[
@@ -5085,6 +5070,20 @@ var EVENTS = [
 {choice:[
 {t:"会えるといいねー。明日もがんばろ",d:0,reply:["会えたらいいね。……先輩の『おやすみ』、聞ける日は、よく眠れる","声、少し掠れてたよ。……風邪、ひかないで。温かくして寝て","……いい夢見てね"]},
 {t:"明日は陸のケーキの日だから忙しい",d:15,note:"他の人の名前を出した",reply:["陸さんのケーキ……","明日も、陸さん、なんだ"]}
+]}
+]},{id:"d4_r_group",day:4,char:"renji",preview:"スタッフのグループチャット、見た？",blocks:[
+{msgs:["スタッフのグループチャット、見た？","先週金曜、夜の話出てたんだけど。……君の名前も、出てた"]},
+{choice:[
+{t:"見たよ。金曜は家でレポートしてた。前にも言ったよね",d:5,note:"少し怪しまれた（尋問はリスク）",reply:["……そうだね。前も、聞いた","グループで話題なると、改めて気になってしまう"]},
+{t:"勇志と映画に行った日のことです",d:18,note:"矛盾＋名前出し",reply:["やっぱり、勇志と……？","家いたって話と、全然違うじゃない"]},
+{t:"グループチャットは見ておりません。",d:20,note:"口調が違う…",reply:["その言い方…","普段と違うと、余計、気になるよ"]}
+]}
+]},
+{id:"d4_s_group",day:4,char:"souta",preview:"グループチャットの金曜の話…",blocks:[
+{msgs:["ねえ、グループで金曜の夜の話、出てたけど","俺と映画行ったこと、言ってないよね……？"]},
+{choice:[
+{t:"言ってないよー。ふたりだけの話だよ",d:0,reply:["……よかった。ありがと","ふたりだけの秘密、か。……守るから、安心して","帰り、いつもの道で帰ろ？ 先輩の歩幅、俺、合わせられるから"]},
+{t:"シオンには全部話したよ",d:15,note:"他の人の名前を出した",reply:["シオンさんに全部…！？","なんで…俺とのこと、話したの…？"]}
 ]}
 ]},
 /* ---------- DAY 5 (10/30 middle) ---------- */
@@ -5449,8 +5448,7 @@ var GATES = [
 {after:["d3_r_museum","d3_s_aqua","d3_y_cake"], app:"calendar", unlock:["d3_r_noon","d3_s_photo"], msg:"カレンダーで今日の予定の重なりを確認した"},
 {after:["d3_r_noon","d3_s_photo"], app:"sns", unlock:["d3_y_check","d3_r_night"], msg:"SNSを開いたら、新しい連絡が来た"},
 {after:["d3_y_check","d3_r_night"], app:"fortune", unlock:["d3_s_night"], msg:"夜になった。新しい連絡が来ている"},
-{after:["d4_r_group","d4_s_group","d4_y_shift"], app:"memo", unlock:["d4_r_perfume","d4_s_back"], msg:"メモを見た。午後のシフトが動き出した"},
-{after:["d4_r_perfume","d4_s_back"], app:"sns", unlock:["d4_y_night","d4_r_night"], msg:"SNSを開いたら、新しい連絡が来た"},
+{after:["d4_y_shift","d4_r_perfume","d4_s_back"], app:"sns", unlock:["d4_y_night","d4_r_night"], msg:"SNSを開いたら、新しい連絡が来た"},
 {after:["d4_y_night","d4_r_night"], app:"fortune", unlock:["d4_s_night"], msg:"夜になった。新しい連絡が来ている"},
 {after:["d5_r_sns","d5_s_sns","d5_y_cake"], app:"photos", unlock:["d5_r_place","d5_s_place"], msg:"写真を見ていたら、新しい連絡が来た"},
 {after:["d5_r_place","d5_s_place"], app:"sns", unlock:["d5_y_night","d5_r_night"], msg:"SNSを開いたら、新しい連絡が来た"},
@@ -5464,6 +5462,7 @@ var GATES = [
 {after:["d2_r_night"], app:null, unlock:["d2_group","d2_sub_akari","d2_free"], msg:"グループチャットと新しい連絡が来た"},
 {after:["d3_s_night"], app:null, unlock:["d3_group","d3_sub","d3_free"], msg:"グループチャットと新しい連絡が来た"},
 {after:["d4_s_night"], app:null, unlock:["d4_group2","d4_sub","d4_free"], msg:"グループチャットと新しい連絡が来た"},
+{after:["d4_group2"], app:null, unlock:["d4_r_group","d4_s_group"], msg:"グループの話を受けて、2人から連絡が来た"},
 {after:["d5_s_night"], app:null, unlock:["d5_group","d5_sub","d5_free"], msg:"グループチャットと新しい連絡が来た"},
 {after:["d6_s_night"], app:null, unlock:["d6_group","d6_sub","d6_free"], msg:"グループチャットと新しい連絡が来た"},
 {after:["d7_s_close","d7_y_close"], app:null, unlock:["d7_group","d7_free","d7_r_epilogue"], msg:"最後のグループチャットと連絡が来た"}
