@@ -4494,6 +4494,9 @@ body.fs-large .ft97Sec,body.fs-large .ft97LuckyTx{font-size:15.5px}
 .igHeartBurst190{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:5;filter:drop-shadow(0 4px 14px rgba(0,0,0,.35));animation:igBurst190 .7s ease-out both}
 @keyframes igBurst190{0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}25%{opacity:1;transform:translate(-50%,-50%) scale(1.12)}45%{transform:translate(-50%,-50%) scale(.96)}100%{opacity:0;transform:translate(-50%,-56%) scale(1)}}
 .igFollowOn190{background:#0095F6!important;color:#fff!important}
+.igExChips191{display:flex;gap:6px;flex-wrap:wrap;padding:8px 12px 2px}
+.igExChips191 button{border:1px solid #DBDBDB;background:#fff;border-radius:999px;padding:6px 13px;font-size:12.5px;font-family:inherit;cursor:pointer}
+.igExChips191 button.on{background:#1C1C1E;color:#fff;border-color:#1C1C1E}
 .fcBar180{display:flex;gap:8px;align-items:center}
 .fcBar180 input{flex:1;min-width:0;background:#F0EFE7;border:1px solid rgba(0,0,0,.05);border-radius:20px;padding:10px 14px;font-size:14px;font-family:inherit;outline:none;color:#222}
 .fcBar180 input:focus{border-color:#06C755}
@@ -4588,7 +4591,7 @@ body.anim-off .fcTyping180 i{animation:none}
 <div id="setMainView">
 <div class="s73TopRow"><button class="s73Close" onclick="closeSettings()" aria-label="閉じる">✕</button></div>
 <div class="s73BigTitle">設定</div>
-<div id="verLine188" style="font-size:12px;color:#8E8E93;margin:-6px 0 10px 2px">キープ管理中！ ver.190</div>
+<div id="verLine188" style="font-size:12px;color:#8E8E93;margin:-6px 0 10px 2px">キープ管理中！ ver.191</div>
 <div class="s73Search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8E8E93" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5L16.7 16.7"/></svg><input id="setSearchInput" type="text" placeholder="検索" autocomplete="off" oninput="setSearch73(this.value)"><svg width="13" height="17" viewBox="0 0 12 18" fill="#8E8E93"><rect x="4" y="1" width="4" height="10" rx="2"/><path d="M1.5 8.5a4.5 4.5 0 0 0 9 0h-1.6a2.9 2.9 0 0 1-5.8 0H1.5zM5.2 13.4h1.6V16H5.2z"/></svg></div>
 <button class="s73Prof" onclick="setSub73('account')"><img src="assets/av_me.jpg" alt=""><span class="s73ProfTx"><b id="setProfName">あなた</b><span>Apple Account、iCloud、メディアと購入</span></span></button>
 <div class="s73Group">
@@ -6814,7 +6817,7 @@ function igTabBar(){ return '<div class="igTabBar"><button onclick="showAppView(
 function snsPostCard(p){ var liked=!!_likes[p.id];
 return '<div class="igPost"><div class="igPostHead"><button class="snsAvBtn" onclick="openSnsProfile(\''+p.id+'\')">'+snsAvatar(p)+'</button><button class="snsNameBtn" onclick="openSnsProfile(\''+p.id+'\')"><b>'+esc(dispName(p.user))+'</b></button>'+'<span class="igDots">•••</span></div>'+
 '<button class="snsImgBtn" onclick="openPost(\''+p.id+'\')"><img class="igImg" src="assets/'+p.img+'?v=148" alt=""></button>'+
-'<div class="igActs"><button onclick="toggleLike(\''+p.id+'\')" aria-label="いいね">'+IG_HEART.replace("FILL", liked? "#FF3040": "none")+'</button><button onclick="openPost(\''+p.id+'\')" aria-label="コメント">'+IG_CMT+'</button><button aria-label="リポスト">'+IG_REPOST82+'</button><button aria-label="共有">'+IG_PLANE+'</button><span class="igSave"><button aria-label="保存">'+IG_SAVE+'</button></span></div>'+
+'<div class="igActs"><button onclick="toggleLike(\''+p.id+'\')" aria-label="いいね">'+IG_HEART.replace("FILL", liked? "#FF3040": "none")+'</button><button onclick="openPost(\''+p.id+'\')" aria-label="コメント">'+IG_CMT+'</button><button aria-label="リポスト" onclick="toast(\'共有シート（この端末内のみ）\')" onclick="toast(\'共有シート（この端末内のみ）\')">'+IG_REPOST82+'</button><button aria-label="共有">'+IG_PLANE+'</button><span class="igSave"><button aria-label="保存" onclick="igSaveToggle191(this)">'+IG_SAVE+'</button></span></div>'+
 '<div class="igLikes">いいね！'+(p.likes+(liked?1:0))+'件</div>'+
 '<div class="igCaption"><b>'+esc(dispName(p.user))+'</b>'+esc(p.text)+'</div>'+
 '<button class="igCmtLink" onclick="openPost(\''+p.id+'\')">コメント'+cmtTotal(p)+'件をすべて見る</button>'+
@@ -6825,7 +6828,7 @@ function toggleLikeDetail(id){ _likes[id]=!_likes[id]; openPost(id);}
 function addComment(id){ var inp=document.getElementById("cmtIn"); if(!inp) return; var v=inp.value.trim(); if(!v) return; if(!S.myComments) S.myComments={}; (S.myComments[id]=S.myComments[id]||[]).push(v); saveGame(); openPost(id); }
 function openPost(id){ var p=null; allPosts144().forEach(function(x){ if(x.id===id) p=x;}); if(!p) return; var liked=!!_likes[p.id]; _igCurPost190 = id;
 var allCmts = p.comments.concat(myCmts(p.id).map(function(t){ return ["あなた",t]; }));
-setAppBody('<div class="igDetail82"><div class="igTopBar82"><button class="igBack82" onclick="showAppView(\'sns\')" aria-label="戻る">'+IG_CHEV82+'</button><b>投稿</b><span class="igTopActs82"><button aria-label="その他">•••</button></span></div><div class="igPost"><div class="igPostHead"><button class="snsAvBtn" onclick="openSnsProfile(\''+p.id+'\')">'+snsAvatar(p)+'</button><button class="snsNameBtn" onclick="openSnsProfile(\''+p.id+'\')"><b>'+esc(dispName(p.user))+'</b></button><span class="igDots">•••</span></div><img class="igImg" src="assets/'+p.img+'?v=148" alt="" ondblclick="igDblLike190(this)"><div class="igActs"><button onclick="toggleLikeDetail(\''+p.id+'\')" aria-label="いいね">'+IG_HEART.replace("FILL", liked? "#FF3040": "none")+'</button><button aria-label="コメント">'+IG_CMT+'</button><button aria-label="リポスト">'+IG_REPOST82+'</button><button aria-label="共有">'+IG_PLANE+'</button><span class="igSave"><button aria-label="保存">'+IG_SAVE+'</button></span></div><div class="igLikes">いいね！'+(p.likes+(liked?1:0))+'件</div><div class="igCaption"><b>'+esc(dispName(p.user))+'</b>'+esc(p.text)+'</div><div class="igDate">'+snsTimeLabel(p)+'</div>'+
+setAppBody('<div class="igDetail82"><div class="igTopBar82"><button class="igBack82" onclick="showAppView(\'sns\')" aria-label="戻る">'+IG_CHEV82+'</button><b>投稿</b><span class="igTopActs82"><button aria-label="その他">•••</button></span></div><div class="igPost"><div class="igPostHead"><button class="snsAvBtn" onclick="openSnsProfile(\''+p.id+'\')">'+snsAvatar(p)+'</button><button class="snsNameBtn" onclick="openSnsProfile(\''+p.id+'\')"><b>'+esc(dispName(p.user))+'</b></button><span class="igDots">•••</span></div><img class="igImg" src="assets/'+p.img+'?v=148" alt="" ondblclick="igDblLike190(this)"><div class="igActs"><button onclick="toggleLikeDetail(\''+p.id+'\')" aria-label="いいね">'+IG_HEART.replace("FILL", liked? "#FF3040": "none")+'</button><button aria-label="コメント">'+IG_CMT+'</button><button aria-label="リポスト" onclick="toast(\'共有シート（この端末内のみ）\')" onclick="toast(\'共有シート（この端末内のみ）\')">'+IG_REPOST82+'</button><button aria-label="共有">'+IG_PLANE+'</button><span class="igSave"><button aria-label="保存" onclick="igSaveToggle191(this)">'+IG_SAVE+'</button></span></div><div class="igLikes">いいね！'+(p.likes+(liked?1:0))+'件</div><div class="igCaption"><b>'+esc(dispName(p.user))+'</b>'+esc(p.text)+'</div><div class="igDate">'+snsTimeLabel(p)+'</div>'+
 '<div class="igCmtSect82">'+ allCmts.map(function(cm){ return '<div class="igCmtRow82">'+personImg(cm[0],32)+'<div class="igCmtMain82"><div class="igCmtTx82"><b>'+esc(dispName(cm[0]))+'</b>'+esc(cm[1])+'</div><div class="igCmtSub82"><span>返信する</span></div></div><button class="igCmtLike82" aria-label="コメントにいいね" onclick="igCmtLike190(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M12 20.7C6.4 17 3 13.6 3 9.9 3 7.2 5 5 7.7 5c1.7 0 3.3.9 4.3 2.4C13 5.9 14.6 5 16.3 5 19 5 21 7.2 21 9.9c0 3.7-3.4 7.1-9 10.8z"/></svg></button></div>';}).join("") +'</div>'+
 '<div class="igCmtInput82">'+personImg("あなた",36)+'<input id="cmtIn" type="text" maxlength="120" placeholder="コメントを追加…" onkeydown="if(event.key===\'Enter\')addComment(\''+p.id+'\')"><button onclick="addComment(\''+p.id+'\')">投稿する</button></div></div>'+igTabBar()); igPaintCmt190(); }
 /* pass67: profile highlights — covers and labels derive only from the
@@ -8009,6 +8012,33 @@ function igPaintCmt190(){
     svg.setAttribute('stroke', on ? '#FF3040' : 'currentColor');
   });
 }
+function igExCell191(p){ return '<button class="igExCell144" onclick="openPost(\'' + p.id + '\')"><img src="assets/' + p.img + '?v=148" alt=""></button>'; }
+function igExChips191(q){
+  var chips = ['保存済み', 'ケーキ', '水族館', 'コーヒー', 'ハロウィン', 'ペンギン'];
+  return '<div class="igExChips191">' + chips.map(function(c){ return '<button class="' + (q === c ? 'on' : '') + '" onclick="igExplore144(\'' + c + '\')">' + c + '</button>'; }).join('') + '</div>';
+}
+function igSavePostId191(btn){
+  var card = btn && btn.closest ? btn.closest('.igPost') : null;
+  if(card){ var lk = card.querySelector('button[onclick*="toggleLike"]'); if(lk){ var m = /\('([^']+)'\)/.exec(lk.getAttribute('onclick') || ''); if(m) return m[1]; } }
+  return _igCurPost190;
+}
+function igPaintSaves191(){
+  document.querySelectorAll('.igSave button').forEach(function(b){
+    var id = igSavePostId191(b); if(!id) return;
+    var svg = b.querySelector('svg'); if(!svg) return;
+    svg.setAttribute('fill', (S.saved190 || {})[id] ? '#1C1C1E' : 'none');
+  });
+}
+function igSaveToggle191(btn){
+  var id = igSavePostId191(btn); if(!id) return;
+  if(!S.saved190) S.saved190 = {};
+  var on = !S.saved190[id];
+  if(on) S.saved190[id] = 1; else delete S.saved190[id];
+  saveGame();
+  igPaintSaves191();
+  toast(on ? '保存しました' : '保存を取り消しました');
+}
+try { new MutationObserver(function(){ igPaintSaves191(); }).observe(document.body, {childList: true, subtree: true}); } catch(e) {}
 function igCmtLike190(btn){
   var btns = Array.prototype.slice.call(document.querySelectorAll('.igCmtLike82'));
   var idx = btns.indexOf(btn); if(idx < 0 || !_igCurPost190) return;
@@ -8137,10 +8167,11 @@ function igExplore144(q){
   var list=users.filter(function(u){ return !q || dispName(u).indexOf(q)>=0 || u.indexOf(q)>=0; });
   var accts=list.map(function(u){ var pid=igUserPost144(u); return '<button class="igExAcct144" '+(pid? 'onclick="openSnsProfile(\''+pid+'\')"':"")+'><span class="igDmAv144">'+personImg(u,48)+'</span><span class="igExAcctTx144"><b>'+esc(dispName(u))+'</b><span>'+esc(u)+'</span></span></button>'; }).join("");
   var posts=allPosts144().filter(function(p){ return p.days[0]<=S.day; });
+  var gridF = (q === '保存済み') ? posts.filter(function(p){ return (S.saved190 || {})[p.id]; }).map(igExCell191).join('') : posts.filter(function(p){ return p.text.indexOf(q) >= 0 || p.user.indexOf(q) >= 0; }).map(igExCell191).join('');
   var grid=posts.map(function(p){ return '<button class="igExCell144" onclick="openPost(\''+p.id+'\')"><img src="assets/'+p.img+'?v=148" alt=""></button>'; }).join("");
   setAppBody('<div class="igExWrap144">'+igTop144("検索","showAppView('sns')")
     +'<div class="igExSearch144"><input id="igExInput144" type="text" placeholder="検索" value="'+esc(q)+'" oninput="igExplore144(this.value)"></div>'
-    +(q? '<div class="igExList144">'+(accts||'<div class="igDmEmpty144">見つかりませんでした</div>')+'</div>' : '<div class="igExGrid144">'+grid+'</div>')
+    + igExChips191(q) + (q? '<div class="igExList144">'+(accts||'<div class="igDmEmpty144">見つかりませんでした</div>')+'</div>' + (gridF? '<div class="igExGrid144">'+gridF+'</div>' : '<div class="igDmEmpty144">投稿が見つかりませんでした</div>') : '<div class="igExGrid144">'+grid+'</div>')
     +'</div>'+igTabBar());
   var inp=document.getElementById("igExInput144");
   if(inp && q){ inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length); }
