@@ -4277,6 +4277,27 @@ body.fs-large .ft97Sec,body.fs-large .ft97LuckyTx{font-size:15.5px}
 .choiceBtn{border:1.5px solid #DFE2DF;color:#1C1E1C;border-radius:16px;box-shadow:none}
 .choiceBtn:active{background:#06C755;color:#fff;border-color:#06C755}
 </style>
+<style id="pass138">
+/* pass138: app chrome fully to real-iOS: white nav band, grouped-gray body.
+   Themed apps keep their own band via :has() rules below (fortune's ft97
+   rule from earlier passes has higher specificity and still wins). */
+.appHead{background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid rgba(60,60,67,.12)}
+.appHead img{box-shadow:0 1px 3px rgba(0,0,0,.20)}
+.appBody{background:#F2F2F7}
+/* clock app: black everywhere, like the real Clock app */
+.appView:has(.clk77){background:#000}
+.appView:has(.clk77) .appHead{background:#000;color:#fff;border-bottom:1px solid rgba(255,255,255,.14)}
+.appView:has(.clk77) .appHead .backBtn{background:rgba(255,255,255,.16);color:#fff;box-shadow:none}
+.appView:has(.clk77) .appBody{background:#000}
+.screen:has(.clk77) .statusbar{background:#000;color:#fff;text-shadow:none}
+/* folder: blurred wallpaper backdrop like a real iOS folder overlay */
+.f86Wrap{background:none;position:relative;overflow:hidden}
+.f86Wrap::before{content:"";position:absolute;inset:-24px;background:url(assets/home_wallpaper.jpg) center 32%/cover;filter:blur(17px) brightness(.82) saturate(1.1);-webkit-filter:blur(17px) brightness(.82) saturate(1.1);z-index:0}
+.f86Wrap>*{position:relative;z-index:1}
+.appView:has(.f86Wrap) .appHead{background:rgba(255,255,255,.94)}
+/* lock screen quick buttons: slightly larger glyphs, closer to iOS */
+.lockBtn svg{width:27px;height:27px}
+</style>
 </head>
 <body>
 <div class="layout">
