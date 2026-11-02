@@ -4216,7 +4216,7 @@ body.fs-large .ft97Sec,body.fs-large .ft97LuckyTx{font-size:15.5px}
 /* ===== Home redesign (pass134, direct edit): reference-style minimal home.
    Full-bleed photo wallpaper (Jihun, in-game photo), no widgets,
    few icons on page 1, the rest on page 2, dots + search pill + dock. */
-.home{background:linear-gradient(180deg,rgba(4,8,14,.38),rgba(4,8,14,.04) 30%,rgba(4,8,14,.12) 60%,rgba(4,8,14,.48)),url(assets/home_wallpaper.jpg) center/cover;padding:56px 16px 12px;overflow:hidden}
+.home{background:linear-gradient(180deg,rgba(4,8,14,.38),rgba(4,8,14,.04) 30%,rgba(4,8,14,.12) 60%,rgba(4,8,14,.48)),url(assets/home_wallpaper.jpg?v=148) center/cover;padding:56px 16px 12px;overflow:hidden}
 .home::before{display:none}
 .homePages{display:flex;flex:1;min-height:0;transition:transform .38s cubic-bezier(.25,.9,.3,1);margin:0 -16px}
 .homePage{flex:0 0 100%;width:100%;min-width:0;padding:0 16px;box-sizing:border-box}
@@ -4292,7 +4292,7 @@ body.fs-large .ft97Sec,body.fs-large .ft97LuckyTx{font-size:15.5px}
 .screen:has(.clk77) .statusbar{background:#000;color:#fff;text-shadow:none}
 /* folder: blurred wallpaper backdrop like a real iOS folder overlay */
 .f86Wrap{background:none;position:relative;overflow:hidden}
-.f86Wrap::before{content:"";position:absolute;inset:-24px;background:url(assets/home_wallpaper.jpg) center 32%/cover;filter:blur(17px) brightness(.82) saturate(1.1);-webkit-filter:blur(17px) brightness(.82) saturate(1.1);z-index:0}
+.f86Wrap::before{content:"";position:absolute;inset:-24px;background:url(assets/home_wallpaper.jpg?v=148) center 32%/cover;filter:blur(17px) brightness(.82) saturate(1.1);-webkit-filter:blur(17px) brightness(.82) saturate(1.1);z-index:0}
 .f86Wrap>*{position:relative;z-index:1}
 .appView:has(.f86Wrap) .appHead{background:rgba(255,255,255,.94)}
 /* lock screen quick buttons: slightly larger glyphs, closer to iOS */
@@ -4695,7 +4695,7 @@ renji:'<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="24
 souta:'<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="#ffe7cb"/><path d="M8 48c1.5-8 7.5-12 16-12s14.5 4 16 12z" fill="#e07a3f"/><path d="M20 34h8v6h-8z" fill="#f0c297"/><ellipse cx="24" cy="25.5" rx="10.5" ry="11.5" fill="#f8d3ac"/><path d="M13 24c-1-3-1-6 .5-8.5l-1-2 3.5 1C17 11 20 9 24 9c5.5 0 9.5 3.4 10.8 8.2l2.7-1-1.2 3.4c.7 1.6.8 3 .5 4.4-1.4-3.4-3-5-5.2-6 .3 1.4 0 2.6-.6 3.8C27.6 17.4 21 15.4 17.4 17.6c-1.9 1.2-3.3 3.4-4.4 6.4z" fill="#a05a2c"/><circle cx="19.6" cy="26.5" r="1.9" fill="#33231a"/><circle cx="28.4" cy="26.5" r="1.9" fill="#33231a"/><circle cx="20.2" cy="25.8" r=".7" fill="#fff"/><circle cx="29" cy="25.8" r=".7" fill="#fff"/><path d="M20.8 30.6c2 1.9 4.4 1.9 6.4 0-.4 2.4-1.7 3.6-3.2 3.6s-2.8-1.2-3.2-3.6z" fill="#a34a3a"/><ellipse cx="16.4" cy="29.5" rx="2" ry="1.2" fill="#f2a488" opacity=".7"/><ellipse cx="31.6" cy="29.5" rx="2" ry="1.2" fill="#f2a488" opacity=".7"/></svg>',
 yuma:'<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="#e6f0cd"/><path d="M13.5 13.5c-2.2 8-1.8 18 .3 26.5l5-1c-1.4-8.2-1.6-16.4-.5-24.5zM34.5 13.5c2.2 8 1.8 18-.3 26.5l-5-1c1.4-8.2 1.6-16.4.5-24.5z" fill="#5f7046"/><path d="M8 48c1.5-8 7.5-12 16-12s14.5 4 16 12z" fill="#7a9a4d"/><path d="M20 34h8v6h-8z" fill="#f0c297"/><ellipse cx="24" cy="25" rx="10.5" ry="11.5" fill="#f6cfae"/><path d="M13.5 24c-.6-9 4.2-15 10.5-15S35 15 34.5 24c-1-4-2.8-6.2-5.4-7.4.2 1.6-.2 3-1 4.2-2-3.2-6-5-9.9-4-2.2.6-3.8 2.8-4.7 6.2z" fill="#5f7046"/><path d="M17.6 26.2c1.3-1 3-1 4.3 0M26.1 26.2c1.3-1 3-1 4.3 0" stroke="#3c4630" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M21.2 31.4c1.7 1.1 3.9 1.1 5.6 0" stroke="#b06a4a" stroke-width="1.4" fill="none" stroke-linecap="round"/><ellipse cx="16.4" cy="29.8" rx="2" ry="1.2" fill="#f2a488" opacity=".55"/><ellipse cx="31.6" cy="29.8" rx="2" ry="1.2" fill="#f2a488" opacity=".55"/></svg>'
 };
-function avatarHTML(k,size){ return '<span class="avatar avimg" style="width:'+size+'px;height:'+size+'px"><img src="assets/av_'+k+'.jpg" alt="'+CHARS[k].name+'"></span>'; }
+function avatarHTML(k,size){ return '<span class="avatar avimg" style="width:'+size+'px;height:'+size+'px"><img src="assets/av_'+k+'.jpg?v=148" alt="'+CHARS[k].name+'"></span>'; }
 
 /* pass51: staff group chat lives in its own room, never inside a 1:1 chat */
 var GROUP_NAME = "駅前カフェ☕スタッフ";
@@ -4707,7 +4707,7 @@ mao:{name:"真央", av:"av_mao.jpg"},
 renji:{name:"シオン", av:"av_renji.jpg"},
 souta:{name:"勇志", av:"av_souta.jpg"},
 yuma:{name:"陸", av:"av_yuma.jpg"}};
-function speakerAvatarHTML(sp,size){ if(CHARS[sp]) return avatarHTML(sp,size); var s=GROUP_SPEAKERS[sp]; return '<img class="pAv" src="assets/'+s.av+'" style="width:'+size+'px;height:'+size+'px" alt="">'; }
+function speakerAvatarHTML(sp,size){ if(CHARS[sp]) return avatarHTML(sp,size); var s=GROUP_SPEAKERS[sp]; return '<img class="pAv" src="assets/'+s.av+'?v=148" style="width:'+size+'px;height:'+size+'px" alt="">'; }
 /* Split a stored group line into speaker + clean text.
    "店長：…" / "真央：…" / "勇志：…" carry their speaker as a prefix in the data;
    unprefixed lines are the protagonist's inner monologue (rendered as a note).
@@ -6735,7 +6735,7 @@ function sfNewTab(){ var si=sfStartIdx(); if(si<0){ _sfTabs.push({k:"start"}); s
 function sfCloseTab(j){ _sfTabs.splice(j,1); if(!_sfTabs.length){ _sfTabs=[{k:"start"}]; _sfCur=0; } else if(j<_sfCur){ _sfCur--; } else if(_sfCur>=_sfTabs.length){ _sfCur=_sfTabs.length-1; } setAppBody(sfHtml()); }
 /* ---------- people registry (photo avatars everywhere) ---------- */
 var PEOPLE={"シオン":"av_renji.jpg","勇志":"av_souta.jpg","陸":"av_yuma.jpg","真央":"av_mao.jpg","あかり":"av_akari.jpg","店長":"av_tencho.jpg","店長・田村":"av_tencho.jpg","母":"av_haha.jpg","あなた":"av_me.jpg","カフェ公式":"av_cafe_shop.jpg"};
-function personImg(name,size){ var f=PEOPLE[name]||"av_me.jpg"; return '<img class="pAv" src="assets/'+f+'" style="width:'+size+'px;height:'+size+'px" alt="">'; }
+function personImg(name,size){ var f=PEOPLE[name]||"av_me.jpg"; return '<img class="pAv" src="assets/'+f+'?v=148" style="width:'+size+'px;height:'+size+'px" alt="">'; }
 var PROFILE_POST={"シオン":"renji_car","勇志":"souta_aqua","陸":"yuma_cake","真央":"mao_latte","あかり":"akari_cinema","あなた":"me_soba","店長":"cafe_hallo","店長・田村":"cafe_hallo","カフェ公式":"cafe_hallo"};
 var PROFILE_BIO={"シオン":"韓国からワーキングホリデーで来日中。カフェの先輩スタッフで、日本語勉強中につきカタコト気味。実家からの荷物と韓国のお菓子が部屋の宝物。静かな場所と、夕方のドライブが好き。","勇志":"カフェの同僚。水族館の年パス持ち。新しい店を見つけるとすぐ誘う。","陸":"カフェの同僚・クローズ勤務。新作ケーキを試作中。第一声から褒めてくるチャラさで距離が近く、軽く見えて実は一途。","真央":"カフェの同僚。ラテアート練習中。","あかり":"大学の友達。映画館によくいる。","あなた":"カフェでバイト中。口調の使い分けが得意。","カフェ公式":"駅前カフェの公式アカウント。集合写真は店長が上げます。"};
 function openPersonProfile(name){ var id=PROFILE_POST[name]; if(id) openSnsProfile(id); }
@@ -7168,13 +7168,13 @@ DECOYS = [
 {n:"真央（同僚）", av:"av_mao.jpg", init:"真", col:"#B0627F", t:"昨日", prev:"金曜の夜の話、グループで出てたよ…", show:function(){ return !!S.completed["d4_group2"]; }, msgs:["ねえ、金曜の夜の話、グループチャットで出てたよ…","私は何も見てないし聞いてないからね！","でも気をつけてね、本当に"]},
 {n:"あかり（大学）", av:"av_akari.jpg", init:"あ", col:"#7A6BA5", t:"昨日", prev:"レポートの締切、来週だよー", show:function(){ return !!S.completed["d2_sub_akari"]; }, msgs:["レポートの締切、来週の月曜だよー","図書館で見かけた気がしたけど人違いだったかも","今度カフェ行くね！"]}];
 var decoyItems = DECOYS.map(function(dc,i){ return {dc:dc, i:i}; }).filter(function(x){ return x.dc.show(); });
-var decoyHtml = decoyItems.length? decoyItems.map(function(x){ var dc=x.dc; var isRead106=!!(S.decoyRead&&S.decoyRead[x.i]); var reps106=(S.decoyReplies&&S.decoyReplies[x.i])||[]; var prev106=reps106.length? "あなた："+reps106[reps106.length-1]: dc.prev; return '<button class="talkItem lineRow89" data-q="'+dc.n+'" onclick="openDecoy('+x.i+')"><span class="avatar avimg" style="width:50px;height:50px"><img src="assets/'+dc.av+'" alt=""></span><span class="grow"><b>'+dc.n+'</b><p>'+esc(prev106)+'</p></span><span class="talkRight"><span class="talkTime">'+fmtT(dc.t)+'</span>'+(isRead106?"":'<span class="unread">1</span>')+'</span></button>';}).join(""): "";
+var decoyHtml = decoyItems.length? decoyItems.map(function(x){ var dc=x.dc; var isRead106=!!(S.decoyRead&&S.decoyRead[x.i]); var reps106=(S.decoyReplies&&S.decoyReplies[x.i])||[]; var prev106=reps106.length? "あなた："+reps106[reps106.length-1]: dc.prev; return '<button class="talkItem lineRow89" data-q="'+dc.n+'" onclick="openDecoy('+x.i+')"><span class="avatar avimg" style="width:50px;height:50px"><img src="assets/'+dc.av+'?v=148" alt=""></span><span class="grow"><b>'+dc.n+'</b><p>'+esc(prev106)+'</p></span><span class="talkRight"><span class="talkTime">'+fmtT(dc.t)+'</span>'+(isRead106?"":'<span class="unread">1</span>')+'</span></button>';}).join(""): "";
 var gTodays = EVENTS.filter(function(e){return e.day===S.day && isGroupEvent(e)});
 var gPending = gTodays.filter(function(e){return S.unlocked[e.id] &&!S.completed[e.id]});
 var gLastDone = gTodays.filter(function(e){return S.completed[e.id]}).pop();
 var gPreview = gPending.length? stripSpeakerPrefix(gPending[0].preview): (gLastDone? "（今日のグループ連絡は終了）": "今日はまだ連絡がない");
 var gRight = gPending.length? '<span class="unread">'+gPending.length+'</span>': '<span class="doneTag">✓</span>';
-var groupHtml = '<button class="talkItem lineRow89" data-q="'+GROUP_NAME+'" onclick="openGroupChat()"><span class="grpAvStack"><img src="assets/av_tencho.jpg" alt=""><img src="assets/av_mao.jpg" alt=""><img src="assets/av_renji.jpg" alt=""></span><span class="grow"><span class="rowName111"><b>'+GROUP_NAME+'</b><span class="grpCnt111">6</span></span><p>'+esc(gPreview)+'</p></span><span class="talkRight"><span class="talkTime">'+fmtT("9:35")+'</span>'+gRight+'</span></button>';
+var groupHtml = '<button class="talkItem lineRow89" data-q="'+GROUP_NAME+'" onclick="openGroupChat()"><span class="grpAvStack"><img src="assets/av_tencho.jpg" alt=""><img src="assets/av_mao.jpg" alt=""><img src="assets/av_renji.jpg?v=148" alt=""></span><span class="grow"><span class="rowName111"><b>'+GROUP_NAME+'</b><span class="grpCnt111">6</span></span><p>'+esc(gPreview)+'</p></span><span class="talkRight"><span class="talkTime">'+fmtT("9:35")+'</span>'+gRight+'</span></button>';
 /* pass89: LINE shell — own profile row + search bar on top, Home (friends)
    tab, bottom tab bar. Friend rows below reuse decoyItems, whose gating is
    the unchanged DECOYS show() set; profile texts are PROFILE_BIO only. */
@@ -7184,10 +7184,10 @@ var head89 = '<div class="lineHead89"><button class="lineBack89" onclick="showHo
 var friendRows89 = Object.keys(CHARS).map(function(k){ var bio=PROFILE_BIO[CHARS[k].name]||"";
 return '<button class="friendRow89 lineRow89" data-q="'+CHARS[k].name+'" onclick="openProfile(\''+k+'\')">'+avatarHTML(k,48)+'<span class="grow"><b>'+CHARS[k].name+'</b>'+(bio?'<p>'+esc(bio)+'</p>':"")+'</span></button>';
 }).join("") + decoyItems.map(function(x){ var dc=x.dc; var bio=PROFILE_BIO[dc.n.split("（")[0]]||"";
-return '<button class="friendRow89 lineRow89" data-q="'+dc.n+'" onclick="openDecoyProfile('+x.i+')"><span class="avatar avimg" style="width:48px;height:48px"><img src="assets/'+dc.av+'" alt=""></span><span class="grow"><b>'+dc.n+'</b>'+(bio?'<p>'+esc(bio)+'</p>':"")+'</span></button>'; }).join("");
+return '<button class="friendRow89 lineRow89" data-q="'+dc.n+'" onclick="openDecoyProfile('+x.i+')"><span class="avatar avimg" style="width:48px;height:48px"><img src="assets/'+dc.av+'?v=148" alt=""></span><span class="grow"><b>'+dc.n+'</b>'+(bio?'<p>'+esc(bio)+'</p>':"")+'</span></button>'; }).join("");
 var friends89 = '<div class="lineSect89">友だち<span>'+(3+decoyItems.length)+'</span></div>'+friendRows89+
 '<div class="lineSect89">グループ<span>1</span></div>'+
-'<button class="friendRow89 lineRow89" data-q="'+GROUP_NAME+'" onclick="openGroupChat()"><span class="grpAvStack"><img src="assets/av_tencho.jpg" alt=""><img src="assets/av_mao.jpg" alt=""><img src="assets/av_renji.jpg" alt=""></span><span class="grow"><b>'+GROUP_NAME+'</b><p>6人</p></span></button>';
+'<button class="friendRow89 lineRow89" data-q="'+GROUP_NAME+'" onclick="openGroupChat()"><span class="grpAvStack"><img src="assets/av_tencho.jpg" alt=""><img src="assets/av_mao.jpg" alt=""><img src="assets/av_renji.jpg?v=148" alt=""></span><span class="grow"><b>'+GROUP_NAME+'</b><p>6人</p></span></button>';
 var lineEmpty98 = '<div class="lineEmpty98" id="lineEmpty98" style="display:none"><div class="es98"><span class="es98Ico">'+ES98_ICO.talk+'</span><b>結果が見つかりません</b><p>「<span id="lineEmptyQ98"></span>」に一致するトークや友だちはありません</p></div></div>';
 var list89 = _lineTab==="home"? profRow89+friends89+lineEmpty98 : items+groupHtml+decoyHtml+endBox+lineEmpty98;
 body.innerHTML = '<div class="appView lineApp89">'+head89+search89+'<div class="talkList">'+list89+'</div>'+lineTabs89()+'</div>';
@@ -7270,7 +7270,7 @@ var dbase=[552,1248,1275][i]||600;
 var dlabel=(dc.t==="昨日"&&DAY_INFO[S.day-1])? DAY_INFO[S.day-1].label: DAY_INFO[S.day].label;
 var reps106=(S.decoyReplies&&S.decoyReplies[i])||[];
 var repsHtml106=reps106.map(function(m,j){ var tt=fmtMin(dbase+dc.msgs.length*4+j*4); return '<div class="msgRow me"><span class="msgMeta">既読<br>'+tt+'</span><div class="bubble">'+esc(m)+'</div></div>'; }).join("");
-body.innerHTML = '<div class="chatView"><div class="chatHead"><div class="chatHeadTop"><button class="backBtn" onclick="showTalkList()" aria-label="戻る">‹</button><b onclick="openDecoyProfile('+di+')" style="cursor:pointer">'+dc.n+'</b>'+lineHeadBtns91("openDecoyMenu91("+i+")")+'</div></div><div class="chatMsgs" id="decoyMsgs106"><div class="dayDivider">'+dlabel+'</div>'+dc.msgs.map(function(m,i){ var tt=fmtMin(dbase+i*4); if(i===0) return '<div class="msgRow">'+avTap94('<img class="pAv" src="assets/'+dc.av+'" style="width:36px;height:36px" alt="">',"openDecoyProfile("+di+")")+'<div class="msgCol"><span class="msgName">'+dc.n.split("（")[0]+'</span><div class="msgLine"><div class="bubble">'+esc(m)+'</div><span class="msgMeta">'+tt+'</span></div></div></div>'; return '<div class="msgRow cont"><span class="msgSpacer"></span><div class="msgCol"><div class="msgLine"><div class="bubble">'+esc(m)+'</div><span class="msgMeta">'+tt+'</span></div></div></div>'; }).join("")+repsHtml106+'</div><div class="choiceArea">'+decoyInputHtml106()+'</div></div>';
+body.innerHTML = '<div class="chatView"><div class="chatHead"><div class="chatHeadTop"><button class="backBtn" onclick="showTalkList()" aria-label="戻る">‹</button><b onclick="openDecoyProfile('+di+')" style="cursor:pointer">'+dc.n+'</b>'+lineHeadBtns91("openDecoyMenu91("+i+")")+'</div></div><div class="chatMsgs" id="decoyMsgs106"><div class="dayDivider">'+dlabel+'</div>'+dc.msgs.map(function(m,i){ var tt=fmtMin(dbase+i*4); if(i===0) return '<div class="msgRow">'+avTap94('<img class="pAv" src="assets/'+dc.av+'?v=148" style="width:36px;height:36px" alt="">',"openDecoyProfile("+di+")")+'<div class="msgCol"><span class="msgName">'+dc.n.split("（")[0]+'</span><div class="msgLine"><div class="bubble">'+esc(m)+'</div><span class="msgMeta">'+tt+'</span></div></div></div>'; return '<div class="msgRow cont"><span class="msgSpacer"></span><div class="msgCol"><div class="msgLine"><div class="bubble">'+esc(m)+'</div><span class="msgMeta">'+tt+'</span></div></div></div>'; }).join("")+repsHtml106+'</div><div class="choiceArea">'+decoyInputHtml106()+'</div></div>';
 var dm106=document.getElementById("decoyMsgs106"); if(dm106) dm106.scrollTop=dm106.scrollHeight;
 }
 function inChat(){ return !!document.getElementById("chatMsgs"); }
@@ -7322,7 +7322,7 @@ var cm=document.getElementById("chatMsgs"); cm.scrollTop=cm.scrollHeight;
    no story code reads it. */
 var GRP_PHONE90 = '<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>';
 var GRP_BURGER90 = '<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
-var GRP_MEMBERS90 = [["tencho","店長・田村","assets/av_tencho.jpg"],["mao","真央","assets/av_mao.jpg"],["renji","シオン","assets/av_renji.jpg"],["souta","勇志","assets/av_souta.jpg"],["yuma","陸","assets/av_yuma.jpg"]];
+var GRP_MEMBERS90 = [["tencho","店長・田村","assets/av_tencho.jpg"],["mao","真央","assets/av_mao.jpg"],["renji","シオン","assets/av_renji.jpg?v=148"],["souta","勇志","assets/av_souta.jpg?v=148"],["yuma","陸","assets/av_yuma.jpg?v=148"]];
 var _grpNotify90 = true;
 function groupMenuHTML90(){
 var members = GRP_MEMBERS90.map(function(m){ return '<div class="grpMember90"><img src="'+m[2]+'" alt=""><b>'+m[1]+'</b></div>'; }).join("")+
@@ -7331,7 +7331,7 @@ var shortBtn = function(label,svg){ return '<button onclick="toast(\''+label+'�
 var icoPhoto = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17.5l4.5-4.5 3.5 3.5 3-3 5 5"/></svg>';
 var icoNote = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 3.5h9L19 7.5V20a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4.5A1 1 0 0 1 6 3.5z"/><path d="M14.5 3.5v4.5H19M8.5 12.5h7M8.5 16h7"/></svg>';
 var icoAlbum = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="15" height="14" rx="2.5"/><path d="M6 6V4.5A1.5 1.5 0 0 1 7.5 3H20a1.5 1.5 0 0 1 1.5 1.5V18A1.5 1.5 0 0 1 20 21h-2"/><circle cx="8.2" cy="10.5" r="1.4"/><path d="M3.8 17.5l4-4 3.2 3.2 2.6-2.6 4.6 4.6"/></svg>';
-return '<div class="grpMenuHead90"><span class="grpAvStack"><img src="assets/av_tencho.jpg" alt=""><img src="assets/av_mao.jpg" alt=""><img src="assets/av_renji.jpg" alt=""></span><b>'+GROUP_NAME+'</b><span>メンバー 6</span></div>'+
+return '<div class="grpMenuHead90"><span class="grpAvStack"><img src="assets/av_tencho.jpg" alt=""><img src="assets/av_mao.jpg" alt=""><img src="assets/av_renji.jpg?v=148" alt=""></span><b>'+GROUP_NAME+'</b><span>メンバー 6</span></div>'+
 '<div class="grpShort90">'+shortBtn("写真・動画",icoPhoto)+shortBtn("ノート",icoNote)+shortBtn("アルバム",icoAlbum)+'</div>'+
 '<div class="grpSect90">メンバー<span>6</span></div>'+
 '<button class="grpAdd90" onclick="toast(\'友だちを追加（表示のみ）\')"><span class="addIco90"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span><b>友だちを追加</b></button>'+
@@ -7379,7 +7379,7 @@ document.getElementById("talkMenu91").classList.add("open");
 }
 function openDecoyMenu91(i){
 var dc=DECOYS[i]; if(!dc) return;
-_talkMenuCur91 = {key:"decoy"+i, av:'<img class="pAv" src="assets/'+dc.av+'" style="width:56px;height:56px" alt="">', name:dc.n, role:"", bio:PROFILE_BIO[dc.n.split("（")[0]]||"", prof:"", profAct:"closeTalkMenu91();openDecoyProfile("+i+")"};
+_talkMenuCur91 = {key:"decoy"+i, av:'<img class="pAv" src="assets/'+dc.av+'?v=148" style="width:56px;height:56px" alt="">', name:dc.n, role:"", bio:PROFILE_BIO[dc.n.split("（")[0]]||"", prof:"", profAct:"closeTalkMenu91();openDecoyProfile("+i+")"};
 document.getElementById("talkMenuBody91").innerHTML=talkMenuHTML91(_talkMenuCur91);
 document.getElementById("talkMenu91").classList.add("open");
 }
@@ -7478,7 +7478,7 @@ function stopRing(){ try{ if(_ringAudio){ _ringAudio.pause(); _ringAudio=null; }
 function stopVoice(){ try{ if(_callAudio){ _callAudio.pause(); _callAudio=null; } }catch(e){} }
 function showIncomingCall(ev){
 _pendingCallEv=ev;
-document.getElementById("callAvWrap").innerHTML='<img src="assets/av_'+ev.char+'.jpg" alt="">';
+document.getElementById("callAvWrap").innerHTML='<img src="assets/av_'+ev.char+'.jpg?v=148" alt="">';
 document.getElementById("callName").textContent=CHARS[ev.char].name;
 document.getElementById("callOverlay").classList.add("open");
 ringStart();
@@ -7523,7 +7523,7 @@ S.history[ev.char].push({type:"divider", text:DAY_INFO[S.day].label+" の会話"
 _voiceMuted=false; _callSec=0;
 var gridBtns=[["ミュート","mute"],["キーパッド","pad"],["スピーカー","spk"],["追加","add"],["FaceTime","ft"],["連絡先","ct"]];
 var gridIco={mute:'<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>',pad:'<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="5" r="1.7"/><circle cx="12" cy="5" r="1.7"/><circle cx="19" cy="5" r="1.7"/><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/><circle cx="5" cy="19" r="1.7"/><circle cx="12" cy="19" r="1.7"/><circle cx="19" cy="19" r="1.7"/></svg>',spk:'<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" stroke="none"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg>',add:'<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10" cy="8" r="3.4"/><path d="M4 20c.8-3.2 3-5 6-5 1.2 0 2.3.3 3.2.9M18 8v6M15 11h6"/></svg>',ft:'<svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor"><path d="M17 10.5V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3.5l4 4v-11l-4 4z"/></svg>',ct:'<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c1-3.6 3.6-5.4 7-5.4s6 1.8 7 5.4"/></svg>'};
-body.innerHTML='<div class="callView"><div class="callHead2"><img src="assets/av_'+ev.char+'.jpg" alt=""><div class="callName2">'+CHARS[ev.char].name+'</div><div class="callTimer" id="callTimer">00:00</div><div class="callSuspLine" id="callSuspLine"></div></div>'+
+body.innerHTML='<div class="callView"><div class="callHead2"><img src="assets/av_'+ev.char+'.jpg?v=148" alt=""><div class="callName2">'+CHARS[ev.char].name+'</div><div class="callTimer" id="callTimer">00:00</div><div class="callSuspLine" id="callSuspLine"></div></div>'+
 '<div class="callMsgs" id="callMsgs"></div>'+
 '<div class="callGrid">'+gridBtns.map(function(g){ return '<button class="callGridBtn" id="cg_'+g[1]+'" onclick="callGridTap(\''+g[1]+'\')"><span class="cgIco">'+gridIco[g[1]]+'</span><span>'+g[0]+'</span></button>';}).join("")+'</div>'+
 '<div class="callChoice" id="callChoice"></div>'+
@@ -7717,7 +7717,7 @@ var bio=PROFILE_BIO[plain]||PROFILE_BIO[dc.n.split("・")[0]]||"";
 var info="";
 if(bio) info+=profCard94("ステータスメッセージ", esc(bio));
 if(!dc.show || dc.show()) info+=profCard94("トーク", esc(dc.prev));
-document.getElementById("profBody").innerHTML = profHero94(profCover94(dc.n,plain), '<img class="pAv" src="assets/'+dc.av+'" style="width:96px;height:96px" alt="">', dc.n, bio) + '<div class="prof94Info">'+info+'</div>';
+document.getElementById("profBody").innerHTML = profHero94(profCover94(dc.n,plain), '<img class="pAv" src="assets/'+dc.av+'?v=148" style="width:96px;height:96px" alt="">', dc.n, bio) + '<div class="prof94Info">'+info+'</div>';
 document.getElementById("profOverlay").classList.add("open");
 }
 function profTalk94(){
@@ -7865,7 +7865,7 @@ if(name){ showHome();} else { showLock();}
 renderSideMeters();
 }
 
-document.querySelectorAll("[data-av]").forEach(function(el){ el.innerHTML = '<img src="assets/av_'+el.getAttribute("data-av")+'.jpg" alt="">'; el.classList.add("avimg"); });
+document.querySelectorAll("[data-av]").forEach(function(el){ el.innerHTML = '<img src="assets/av_'+el.getAttribute("data-av")+'.jpg?v=148" alt="">'; el.classList.add("avimg"); });
 renderSideMeters();
 applySettings();
 showLock();
