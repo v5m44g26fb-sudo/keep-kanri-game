@@ -8300,6 +8300,13 @@ FC180_POOLS.yuma.afterq = ['そっかー。聞けてよかったー', 'うん、
 FC180_POOLS.renji.sendphoto = ['……これでいい？ さっき撮った', 'うん。……君にだけ、ね'];
 FC180_POOLS.souta.sendphoto = ['いいよ。……これ、好きな一枚', 'うん。……君にだけ、ね'];
 FC180_POOLS.yuma.sendphoto = ['いいよー。これ好きな一枚ー', 'うん、君にだけねー'];
+
+FC180_POOLS.renji.hislikes = ['好きなのはコーヒー。……君と飲むのが一番', 'カフェ巡りが好き。君と行きたい店、あるんだ', '食べ物は、辛いもの。……君は？'];
+FC180_POOLS.souta.hislikes = ['好きなのは、そばと……ペンギン', '趣味は動画と、君のことを考えること', '甘いものも好き。……君と分けたい'];
+FC180_POOLS.yuma.hislikes = ['好きなのはケーキと甘いものー', '趣味はドライブー。君を乗せたいー', '好きなタイプ？ ……君みたいな人ー'];
+FC180_POOLS.renji.ashita = ['明日も会える？ ……楽しみにしてる', '明日の約束、忘れない。……僕も、楽しみ', '明日。……うん、指切りしたい気分'];
+FC180_POOLS.souta.ashita = ['明日も会える？ ……楽しみにしてる', '明日のこと、忘れないよ。……楽しみ', '明日。……君と会えるなら、頑張れる'];
+FC180_POOLS.yuma.ashita = ['明日も会えるー？ 楽しみにしてるー', '明日の約束、忘れないよー。楽しみー', '明日が待ち遠しいー'];
 var FC180_RULES = [
   ['morning', /おはよ/], ['home', /ただいま/], ['night', /おやすみ/],
   ['bye', /バイバイ|またね|じゃあね|また明日/], ['greet', /こんにちは|こんばんは|ハロー/],
@@ -8321,6 +8328,7 @@ var FC180_RULES = [
   ['hisday', /(何してた|どんな一日|今日はどうだった|一日どう)/],
   ['nokori', /(あと何日|残り何日|終わりまで)/],
   ['sendphoto', /(写真送って|写真見せて|写真みせて|写真ちょうだい)/],
+  ['ashita', /(明日|今度)/],
   ['tabeta', /食べた|ごはん|ご飯/], ['doko', /どこ/], ['hey', /^(ねえ|ねー|おい|ちょ|あの|もしもし)/]
 ];
 function fcReply180(k, text){
@@ -8333,6 +8341,7 @@ function fcReply180(k, text){
   if(!intent && FC180_OTHER[k] && FC180_OTHER[k].some(function(n){ return t.indexOf(n) >= 0; })) intent = 'jealous';
   if(!intent && /(写真送って|写真見せて|写真みせて|写真ちょうだい)/.test(t)) intent = 'sendphoto';
   if(!intent && /(あと何日|残り何日|終わりまで)/.test(t)) intent = 'nokori';
+  if(!intent && /(好きな食べ物|好きなもの|趣味|好物|好きなタイプ)/.test(t)) intent = 'hislikes';
   if(!intent && /(なんで|どうして)/.test(t)) intent = 'why';
   if(!intent && !/[ぁ-んァ-ヶ一-龠a-zA-Z0-9]/.test(t)) intent = 'emoji';
   if(!intent){
